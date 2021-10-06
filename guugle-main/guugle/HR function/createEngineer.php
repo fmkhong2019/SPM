@@ -1,3 +1,6 @@
+<?php
+    include 'connection.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,55 +9,66 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Table</title>
+    <title>Create new Engineer</title>
 </head>
 <body>
   <!-- add or modify code as necessary -->
-  <h1>Create/Edit Engineer account</h1>
-  <form class="m-2">
+  <h1>Create Engineer account</h1>
+  <form method="get" action="process.php" class="m-2">
     <div class="form-group">
       <label for="employeeID">Employee ID</label>
-      <input type="text" id="id" class="form-control">
+      <input type="text" id="id" name="id" class="form-control">
     </div>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" id="name" class="form-control">
+      <input type="text" id="name" name="name" class="form-control">
     </div>
     <div class="form-group">
       <label for="email">Phone Number</label>
-      <input type="text" id="phone" class="form-control">
+      <input type="text" id="phone" name="phone" class="form-control">
     </div>
     <div class="form-group">
       <label for="date">Date joined</label>
       <input type="date" class="form-control" name="date" 
-        placeholder="dd-mm-yyyy" value=""
-        min="1997-01-01" max="2030-12-31" id="date">
+        placeholder="yyyy-mm-dd" value=""
+        min="1997-01-01" max="2030-12-31" id="date" name="date">
     </div>
     <div class="form-group">
       <label for="email">Category</label>
-      <select name="category" id="category" class="form-control">
+      <select name="category" id="category" class="form-control" name="category">
         <option value="trainer">Trainer/Senior</option>
         <option value="engineer">Engineer/Junior</option>
       </select>
     </div>
-    <button type="button" class="btn btn-primary" onclick="insert()">Create</button>
+    <div class="form-group">
+      <label for="name">Address</label>
+      <input type="text" id="address" class="form-control" name="address">
+    </div>
+    <button type="button" class="btn btn-warning" onclick="test()">Test</button>
+    <input type="submit" class=" btn btn-primary" value="Create">
   </form>
 
     <table id="engineer-table" class="table table-dark m-2">
-      <tr><th>Employee ID</th><th>Name</th><th>Category</th><th>phone No.</th><th>Date joined</th></tr>
-      <tr><td>0012</td><td>Peter Ong</td><td>trainer</td><td>12345678</td><td>2021-09-07</td><td><button type="button" class="btn btn-primary" onclick="remove()">Remove</button></td></tr>
-      <tr><td>0013</td><td>Adriel Hong</td><td>engineer</td><td>12345679</td><td>2020-08-30</td><td><button type="button" class="btn btn-primary" onclick="remove()">Remove</button></td></td></tr>
+      <tr><th>Employee ID</th><th>Name</th><th>Category</th><th>phone No.</th><th>Date joined</th><th>Address</th></tr>
     </table>
+    
 
     <script>
-     
-      function insert() {
-          var id = document.getElementById("id").value;   
+      
+      var table = document.getElementById("engineer-table");
+      var success = document.getElementById("showSuccess");
+
+      table.style.display = "none";
+
+      function test() {
+          table.style.display = "block";
+          var id = document.getElementById("id").value;     
           var name = document.getElementById("name").value;
           var phone = document.getElementById("phone").value;
           var category = document.getElementById("category").value;
           var date = document.getElementById("date").value;
-          var table = document.getElementById("engineer-table");
+          var address = document.getElementById("address").value;
+        
           var row = table.insertRow(-1);
           var cell1 = row.insertCell(0);
           var cell2 = row.insertCell(1);
@@ -67,22 +81,13 @@
           cell3.innerHTML = category;
           cell4.innerHTML = phone;
           cell5.innerHTML = date;
-          cell6.innerHTML = '<button type="button" class="btn btn-primary" onclick="remove()">Remove</button>';
+          cell6.innerHTML = address;
         // Add Code here
        
       }
-
-    function remove(){
-      var table = document.getElementById("engineer-table");
-        if(confirm("Are you sure removing this engieer?")){
-          console.log(this);
-          console.log("removed");
-        }else{
-          console.log("no");
-        }
-    }
+    
     </script>
-      
+    
      
 
    
