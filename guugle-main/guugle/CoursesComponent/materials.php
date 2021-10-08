@@ -1,6 +1,7 @@
 <script type='text/javascript'>
     const sectionId = `<?php echo(1)?>`;
-    const classId = `<?php echo(1)?>;`
+    const classId = `<?php echo(1)?>`;
+    const engineerId = `<?php echo(4)?>`;
 </script>
 
 <!DOCTYPE html>
@@ -74,30 +75,25 @@
                 if (this.readyState ==   4 && this.status==200){
                     console.log(this.responseText);
                     let data = JSON.parse(this.responseText).materials;
-                    console.log(typeof(data));
+                    // console.log(typeof(data));
                     materials = data;
                     
                     for (material of materials){
-                        var name= material["name"]
-                        var filePath = material["filePath"]
-                        var completed = material["completed"]
-                        var materialId = material["materialId"]
-                        // var completed = classes["completed"]
-                        // var enrolledDate = classes["enrolledDate"]
-                        // var completedDate = classes["completedDate"]
-                        // var progress = classes["progress"]
-
+                        var name= material["name"];
+                        var filePath = material["filePath"];
+                        var materialId = material["materialId"];
+                        var completed = material["completed"]["viewing"]["completed"];
                         value +=
                             `<tr>
                                 <th scope="row">${name}</th>
                                 <td>${filePath}</td>
                                 <td>
-                                    <a href="./server/helper/getS3.php?keyPath=${filePath}" class="btn btn-primary">Click to View</a>
+                                    <a href="./server/helper/getS3.php?keyPath=${filePath}&engineerId=${engineerId}&materialId=${materialId}" class="btn btn-primary">Click to View</a>
                                 </td>`;
 
                         if(completed == 0) {
                             value += ` <td>
-                                    <a href="./server/helper/updateMaterial.php?materialId=${materialId}" class="btn btn-primary">Incomplete</a>
+                                    <a href="./server/helper/updateViewingCompletion.php?engineerId=${engineerId}&materialId=${materialId}" class="btn btn-primary">Incomplete</a>
                                 </td>
                             </tr>`;
                         }

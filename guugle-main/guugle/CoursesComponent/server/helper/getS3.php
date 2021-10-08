@@ -1,5 +1,8 @@
 <?php
-    // AWS Info
+    require_once "common.php";
+    $dao = new ViewingDAO();
+
+   // AWS Info
     $bucketName = 'spmlmsmaterials';
     $IAM_KEY = 'AKIAR3OUAEMXP2SOFBKT';
     $IAM_SECRET = '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';
@@ -10,7 +13,25 @@
     use Aws\S3\Exception\S3Exception;
 
     $keyPath = $_GET['keyPath'];
-    var_dump($keyPath);
+    // var_dump($keyPath);
+
+    $materialId = $_GET['materialId'];
+    $engineerId = $_GET['engineerId'];
+
+    var_dump(($_GET));
+
+    $result = $dao-> createViewing($materialId, $engineerId);
+    var_dump($result);
+
+
+    if(!$result) {
+        $result = $dao-> updateLatest($materialId, $engineerId);
+        echo('hello there');
+    }
+    
+    
+
+    
 
     // Get file
     try {
