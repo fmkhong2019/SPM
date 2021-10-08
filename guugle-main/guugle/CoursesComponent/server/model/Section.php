@@ -1,10 +1,10 @@
 <?php
 
-class section {
-    private $sectionid;
-    private $classid;
-    private $name;
-    private $description;
+class Section {
+    public $sectionid;
+    public $classid;
+    public $name;
+    public $description;
     
     public function __construct($sectionid, $classid, $name, $description) {
         $this->sectionid = $sectionid;

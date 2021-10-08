@@ -49,8 +49,8 @@
                         <tr style="border-bottom: 2px solid orange;">
                             <th scope="col">Name</th>
                             <th scope="col">File Path</th>
-                            <th scope="col">Completed</th>
                             <th scope="col">View</th>
+                            <th scope="col">Completed?</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -81,6 +81,7 @@
                         var name= material["name"]
                         var filePath = material["filePath"]
                         var completed = material["completed"]
+                        var materialId = material["materialId"]
                         // var completed = classes["completed"]
                         // var enrolledDate = classes["enrolledDate"]
                         // var completedDate = classes["completedDate"]
@@ -90,11 +91,23 @@
                             `<tr>
                                 <th scope="row">${name}</th>
                                 <td>${filePath}</td>
-                                <td>${completed}</td>
                                 <td>
-                                    <a href="./server/helper/getS3.php?keyPath=${filePath}" class="btn btn-primary">Button</a>
+                                    <a href="./server/helper/getS3.php?keyPath=${filePath}" class="btn btn-primary">Click to View</a>
+                                </td>`;
+
+                        if(completed == 0) {
+                            value += ` <td>
+                                    <a href="./server/helper/updateMaterial.php?materialId=${materialId}" class="btn btn-primary">Incomplete</a>
                                 </td>
                             </tr>`;
+                        }
+                        
+                        else {
+                            value += ` <td>
+                                    <span>Completed!</span>
+                                </td>
+                            </tr>`;
+                        }
                         
                     }
                     value += `</tbody>`;

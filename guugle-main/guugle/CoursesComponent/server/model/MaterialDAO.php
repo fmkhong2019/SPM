@@ -23,5 +23,26 @@
 
             return $result;
         }
+
+        public function updateComplete($materialId) {
+            $conn = new ConnectionManager();
+            $pdo = $conn->getConnection();
+            
+            $sql = "UPDATE `Material`
+            SET `completed` = 1
+            WHERE `materialId` = :materialId;";
+
+            $stmt = $pdo->prepare($sql);
+            // $stmt->bindParam(':class', $classId, PDO::PARAM_INT);
+            $stmt->bindParam(':materialId', $materialId, PDO::PARAM_INT);
+
+            $isOk = $stmt->execute();
+            $stmt = null;
+            $pdo = null;
+            return $isOk;
+        }
+
+
+
     }
 ?>
