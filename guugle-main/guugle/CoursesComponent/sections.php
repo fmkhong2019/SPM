@@ -1,3 +1,18 @@
+<?php
+// Ensures that user has successfully logged in and has a full profile with us!
+session_start();
+#if (!isset($_SESSION["id"]) || !isset($_SESSION["login"])  ){
+#  header("Location: ../../../index.html");
+#  exit();
+$_SESSION["cid"] = 1;
+#}
+?>
+<script type='text/javascript'>
+const classId = '<?php echo $_SESSION["cid"]?>';
+
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,9 +58,8 @@
                     <thead>
                         <tr style="border-bottom: 2px solid orange;">
                             <th scope="col">#</th>
-                            <th scope="col">EngineerId</th>
-                            <th scope="col">ClassId</th>
-                            <th scope="col">Go to Course</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -61,47 +75,55 @@
 
 
     <script>
-        function getClass(){
+        console.log("nihao")
+        function getSection(){
+            console.log("hello");
             const request = new XMLHttpRequest();
-            
-            value = `<tbody>`;
             request.onreadystatechange = function(){
-                if (this.readyState ==   4 && this.status==200){
-                    console.log(this.responseText);
-                    let data = JSON.parse(this.responseText).classes;
-                    console.log(typeof(data));
-                    c = data;
-                    count = 0;
+            if (this.readyState ==   4 && this.status==200){
+                console.log(this.responseText)
+                let data = JSON.parse(this.responseText).section;
+                console.log(typeof(data))
+                s = data
+                
+                for (section of s){
+                    var classid = section["classId"]
+                    var sectionid = section["sectionId"]
+                    var sname = section["name"]
+                    var description = section["description"]
+                    // var completed = classes["completed"]
+                    // var enrolledDate = classes["enrolledDate"]
+                    // var completedDate = classes["completedDate"]
+                    // var progress = classes["progress"]
+                    search_results.innerHTML += `
+                    <tr><td>${classid}</td>
                     
-                    for (classes of c){
-                        count += 1;
-                        var classid = classes["classId"]
-                        var engineerid = classes["engineerId"]
-                        // var completed = classes["completed"]
-                        // var enrolledDate = classes["enrolledDate"]
-                        // var completedDate = classes["completedDate"]
-                        // var progress = classes["progress"]
-
-                        value +=
-                            `<tr>
-                                <th scope="row">${count}</th>
-                                <td>${engineerid}</td>
-                                <td>${classid}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary">Button</a>
-                                </td>
-                            </tr>`;
-                        
-                    }
-                    value += `</tbody>`;
-                    document.getElementById("search_results").innerHTML = value;
+                    <td>${sname}</td>
+                    <td>${description}</td>
+                    <td><input type = "button" value = "View all materials" id = $sectionid = onclick="myFunction(${sectionid})"></button></td>
+                    </tr>
+                    </form>`
+                                        
                 }
+            search_results.innerHTML += `</table>`
             }
-            request.open("GET", "./server/helper/getEnrollment.php", true);
+            }
+            //request.open("GET", "./server/helper/getSection.php", true);
+            //request.send();
+            request.open("GET", `./server/helper/getSection.php?classId=${classId}`, true);
             request.send();
         }
-    getClass();
+        function myFunction(section) {
+                        var sid = section
+                        //const xmlHttp = new XMLHttpRequest();
+                        //xmlHttp.open("GET", `./materials.php?sectionId=${sid}`,true);
+                        //xmlHttp.send();
+                        //console.log(sid)    
 
-        </script>
+                        window.location.href = "./materials.php?sectionId=" + sid;
+            }
+
+    getSection();
+    </script>
 </body>
 </html>

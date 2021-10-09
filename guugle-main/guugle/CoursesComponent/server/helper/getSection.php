@@ -2,7 +2,8 @@
     session_start();
     require_once "common.php";
     $dao = new SectionDAO();
-        $section = $dao->getSection();
+    $classId = $_GET['classId'];
+        $section = $dao->getSection($classId);
         $result = array();
     
         foreach ($section as $s) {
