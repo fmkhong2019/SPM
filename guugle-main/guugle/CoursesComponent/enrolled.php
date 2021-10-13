@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,9 +126,10 @@
                                 <th scope="row">${count}</th>
                                 <td>${coursename}</td>
                                 <td>${enrolleddate}</td>
+                                
 
                                 <td>
-                                    <a href="#" class="btn btn-primary">Button</a>
+                                <input type = "button" value = "View all materials" id = $sectionid = onclick="RedirectFunction(${classid})"></button>
                                 </td>
                             </tr>`;
                         
@@ -140,6 +142,16 @@
             request.open("GET", "./server/helper/getEnrollment.php", true);
             request.send();
         }
+        function RedirectFunction(classid) {
+                        var cid = classid
+                        //const xmlHttp = new XMLHttpRequest();
+                        //xmlHttp.open("GET", `./materials.php?sectionId=${sid}`,true);
+                        //xmlHttp.send();
+                        //console.log(sid)    
+
+                        window.location.href = "./sections.php?classId=" + cid;
+            }
+
     getClass();
 
         </script>

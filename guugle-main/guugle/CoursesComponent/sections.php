@@ -4,12 +4,12 @@ session_start();
 #if (!isset($_SESSION["id"]) || !isset($_SESSION["login"])  ){
 #  header("Location: ../../../index.html");
 #  exit();
-$_SESSION["cid"] = 1;
+$classId = $_GET["classId"];
 #}
 ?>
 <script type='text/javascript'>
-const classId = '<?php echo $_SESSION["cid"]?>';
 
+const classId = '<?php echo $_GET["classId"]?>';
 </script>
 
 
@@ -83,7 +83,7 @@ const classId = '<?php echo $_SESSION["cid"]?>';
             if (this.readyState ==   4 && this.status==200){
                 console.log(this.responseText)
                 let data = JSON.parse(this.responseText).section;
-                console.log(typeof(data))
+                console.log(data)
                 s = data
                 
                 for (section of s){
