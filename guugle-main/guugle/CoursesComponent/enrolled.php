@@ -52,24 +52,69 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">EngineerId</th>
-                                <th scope="col">ClassId</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Enrolled Date</th>
                                 <th scope="col">Take me to the course</th>
                             </tr>
                         </thead>
                         <tbody>`;
             request.onreadystatechange = function(){
                 if (this.readyState ==   4 && this.status==200){
-                    console.log(this.responseText);
+                   // console.log(this.responseText);
                     let data = JSON.parse(this.responseText).classes;
-                    console.log(typeof(data));
+                    //console.log(data1);
                     c = data;
-                    count = 0;
+                    // d = data1;
+                    // e = data2;
+                    // console.log(c)
+                     count = 0;
+                    // abc = [] // contains all classId the engineer take
+                    // def = [] // contains all courseId of the classId
+                    // zxc = []
+                    // final = []
+                    // for (classes of c){
+                    //     var classid = classes["classId"]
+                    //     var engineerid = classes["engineerId"]
+                    //     abc.push(classid)
+                    // }
+                    // for (classesDetails of d){
+                    //     var courseid = classesDetails["courseId"]
+                    //     var classid1 = classesDetails["classId"]
+                    //     for (x of abc){
+                    //         console.log("x",x)
+                    //         if (classid1 == x){
+                    //             def.push(courseid)
+                    //     }
+                    //  }
+                    // }
+                    // console.log("def",def)
+                    // // for(courses of e){
+                    // //     var courseid1 = courses["courseId"]
+                    // //     var courseName = courses["courseName"]
+                    // //     for(z of def){
+                    // //         if (courseid1 == z){
+                    // //             zxc.push(courseName)
+                    // //         }
+                    // //     }
+                    // // }
+                    // var course_dict = new Object();
+                    // var class_dict = new Object();
+                    // for (courses of e) {
+                    //     course_dict[courses["courseId"]] = courses["courseName"]
+                    // }
                     
+                    // // for (classesDetails of d){
+                    // //     class_dict[classesDetails[]]
+                    // // } 
+                    // console.log(course_dict)
+                    //console.log(course_dict.length)
                     for (classes of c){
                         count += 1;
                         var classid = classes["classId"]
                         var engineerid = classes["engineerId"]
+                        var coursename = classes["courseName"]
+                        var enrolleddate = classes["enrolledDate"]
+   
                         // var completed = classes["completed"]
                         // var enrolledDate = classes["enrolledDate"]
                         // var completedDate = classes["completedDate"]
@@ -78,8 +123,9 @@
                         value +=
                             `<tr>
                                 <th scope="row">${count}</th>
-                                <td>${engineerid}</td>
-                                <td>${classid}</td>
+                                <td>${coursename}</td>
+                                <td>${enrolleddate}</td>
+
                                 <td>
                                     <a href="#" class="btn btn-primary">Button</a>
                                 </td>
