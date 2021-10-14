@@ -10,14 +10,47 @@ class EnrollmentDAO {
     // Takes $id and returns info 
     #returns null if there is nothing to retrieve
     #Retrieve / get
-    public function getClass() {
+    public function getClass($engineerid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-
-        $sql = "SELECT * FROM enrollment";
+        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId ";
 
         $stmt = $pdo->prepare($sql);
-        #$stmt->bindParam(':engineerId', $engineerId, PDO::PARAM_STR);
+        $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
+        
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        
+        $result = [];
+        // $post_object = null;
+        while( $row = $stmt->fetch() ) {
+            $result[] = 
+                new Enrollment(
+                    $row['engineerId'],
+                    $row['classId'],
+                    $row['completedDate'],
+                    $row['completed'],
+                    $row['enrolledDate'],
+                    $row['progress']
+                );
+        
+        }
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
+ 
+
+    }
+
+    public function getProgress($engineerid, $classid) {
+        $conn = new ConnectionManager();
+        $pdo = $conn->getConnection();
+        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId AND `classId` = :classId ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
+        $stmt->bindParam(':classId', $classid, PDO::PARAM_STR);
         
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -33,6 +66,7 @@ class EnrollmentDAO {
                     $row['completed'],
                     $row['enrolledDate'],
                     $row['progress']
+                    
                 );
         
         }
