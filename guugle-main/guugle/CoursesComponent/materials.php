@@ -24,6 +24,15 @@
 
     <title>Document</title>
 </head>
+
+<style>
+    body {
+        background-image: url("./bg_6.jpg");
+        background-repeat: repeat;
+        background-size: cover;
+    }
+</style>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
         <a href="main.php" class="navbar-brand">LMS</a>
@@ -76,7 +85,8 @@
                     console.log(this.responseText);
                     let data = JSON.parse(this.responseText).materials;
                     // console.log(typeof(data));
-                    materials = data;
+                    var materials = data;
+                    var quizAccess = true;
                     
                     for (material of materials){
                         var name= material["name"];
@@ -92,6 +102,7 @@
                                 </td>`;
 
                         if(completed == 0) {
+                            quizAccess = false;
                             value += ` <td>
                                     <a href="./server/helper/updateViewingCompletion.php?engineerId=${engineerId}&materialId=${materialId}" class="btn btn-primary">Incomplete</a>
                                 </td>
@@ -106,6 +117,19 @@
                         }
                         
                     }
+
+                    if(quizAccess){
+                        value += `<tr>
+                                <th scope="row">Quiz</th>
+                                <td>Test</td>
+                                <td>
+                                    <a href="test.com" class="btn btn-primary">Bring me to Quiz</a>
+                                </td>
+                                <td>Test</td>`;
+                    }
+
+         
+        
                     value += `</tbody>`;
                     document.getElementById("search_results").innerHTML = value;
                 }

@@ -1,7 +1,6 @@
 <?php
     require_once "common.php";
     $dao = new MaterialDAO();
-    
     $dao2 = new ViewingDAO();
 
     // if ((isset($_GET['classId'])) && (isset($_GET['sectionId']))){

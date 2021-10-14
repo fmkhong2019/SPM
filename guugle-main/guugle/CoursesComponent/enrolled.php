@@ -19,6 +19,7 @@
 
     <title>Document</title>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
         <a href="main.php" class="navbar-brand">LMS</a>
