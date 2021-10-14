@@ -1,5 +1,5 @@
 <?php
-    include 'connection.php'
+    include 'common.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,16 +23,13 @@
     <table id="engineer-table" class="table table-dark m-2">
       <tr><th>Employee ID</th><th>Name</th><th>Category</th><th>phone No.</th><th>Date joined</th><th>Address</th></tr>
       <?php
-        $sql = "SELECT employeeId, name, phoneNumber, dateJoined, address FROM employee";
-        $result = $conn->query($sql);
+        $EmpDAO = new EmployeeDAO();
+        $employees = $EmpDAO->getAll();
         
-        if($result->num_rows>0){
-            while($row=$result->fetch_assoc()){
-                echo "<tr><th>".$row["employeeId"]."</td><td>".$row["name"]."</td><td>learner</td><td>".$row["phoneNumber"]."</td><td>".$row["dateJoined"]."</td><td>".$row["address"]."</td>"."<td><button type='button' class='btn btn-danger mx-2' onclick='remove()'>Remove</button><button type='button' class='btn btn-success mx-2' onclick='edit(this)'>Edit</button><button type='button' class='btn btn-primary mx-2' onclick='assign(this)'>Assign</button></td></tr>";
-            }
-        }else{
-            echo "0 result";
+        foreach($employees as $employee){
+          echo "<tr><th>".$employee->_employeeId."</td><td>".$employee->_name."</td><td>learner</td><td>".$employee->_phoneNumber."</td><td>".$employee->_dateJoined."</td><td>".$employee->_address."</td>"."<td><button type='button' class='btn btn-danger mx-2' onclick='remove()'>Remove</button><button type='button' class='btn btn-success mx-2' onclick='edit(this)'>Edit</button><button type='button' class='btn btn-primary mx-2' onclick='assign(this)'>Assign</button></td></tr>";
         }
+        
         ?>
     </table>
     <!-- End of Assign Engineers -->
@@ -79,22 +76,19 @@
     <h1>View Class</h1>
     <hr>
     <h4>Search by Course name / ID: </h4>
-  <label for="name">Course name / ID: </label>
-  <input type="text" id="name">
+    <label for="name">Course name / ID: </label>
+    <input type="text" id="name">
 
     <table id="engineer-table" class="table table-striped m-2">
       <tr><th>Course Name</th><th>Class ID</th><th>Start Date</th><th>End Date</th><th>Trainer</th><th>classSize</th><th></th></tr>
       <?php
-        $sql = "SELECT classId, courseName,startDate, endDate, trainerId, classSize FROM class";
-        $result = $conn->query($sql);
-        
-        if($result->num_rows>0){
-            while($row=$result->fetch_assoc()){
-                echo "<tr><th>".$row["courseName"]."</td><td>".$row["classId"]."</td><td>".$row["startDate"]."</td><td>".$row["endDate"]."</td><td>".$row["trainerId"]."</td>"."</td><td>".$row["classSize"]."</td><td><button type='button' id='".$row["classId"]."'"."class='btn btn-primary' data-toggle='popover' data-placement='top' title='Registered Engineers' data-content='name1, name2, name3, name4, name5, name6, name7,name8...'>View registered engineers</button></td></tr>";
-            }
-        }else{
-            echo "0 result";
+         $classDAO = new ClassDAO();
+         $classes = $classDAO->getAll();
+       
+        foreach($classes as $class){
+          echo "<tr><th>".$class->courseName."</td><td>".$class->classid."</td><td>".$class->startDate."</td><td>".$class->endDate."</td><td>".$class->trainerId."</td>"."</td><td>".$class->classSize."</td><td><button type='button' id='".$class->classid."'"."class='btn btn-primary' data-toggle='popover' data-placement='top' title='Registered Engineers' data-content='name1, name2, name3, name4, name5, name6, name7,name8...'>View registered engineers</button></td></tr>";
         }
+        
         ?>
     </table>
     

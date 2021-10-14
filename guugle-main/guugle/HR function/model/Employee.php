@@ -3,9 +3,9 @@
     class Employee{
 	    public $_employeeId;
 	    public $_name;
-      public $_phoneNumber;
-      public $_dateJoined;
-      public $_address;
+      	public $_phoneNumber;
+      	public $_dateJoined;
+      	public $_address;
       
       public function __construct($employeeId, $name, $phoneNumber, $dateJoined, $address){
         $this->_employeeId = $employeeId;
