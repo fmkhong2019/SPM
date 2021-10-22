@@ -2,7 +2,7 @@
 
 require_once 'common.php';
 
-class ClassDAO {
+class CourseDAO {
 
     public function getAll() {
         // STEP 1
@@ -11,13 +11,9 @@ class ClassDAO {
 
         // STEP 2
         $sql = "SELECT
-                    classId,
                     courseId,
-                    startDate,
-                    endDate,
-                    trainerId,
-                    classSize
-                FROM class"; // SELECT * FROM post; // This will also work
+                    courseName
+                FROM course"; // SELECT * FROM post; // This will also work
         $stmt = $conn->prepare($sql);
 
         // STEP 3
@@ -25,16 +21,12 @@ class ClassDAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         // STEP 4
-        $classes = []; // Indexed Array of Post objects
+        $courses = []; // Indexed Array of Post objects
         while( $row = $stmt->fetch() ) {
-            $classes[] =
-                new Classes(
-                    $row['classId'],
+            $courses[] =
+                new Course(
                     $row['courseId'],
-                    $row['startDate'],
-                    $row['endDate'],
-                    $row['trainerId'],
-                    $row['classSize']);
+                    $row['courseName']);
         }
 
         // STEP 5
@@ -42,10 +34,10 @@ class ClassDAO {
         $conn = null;
 
         // STEP 6
-        return $classes;
+        return $courses;
     }
 
-    public function getClassbyClassId($id) {
+    public function getCourse($id) {
         // STEP 1
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
@@ -53,9 +45,9 @@ class ClassDAO {
         // STEP 2
         $sql = "SELECT
                     *
-                FROM class
+                FROM course
                 WHERE 
-                    classId = :id";
+                    courseId = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
@@ -64,16 +56,12 @@ class ClassDAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         // STEP 4
-        $class_object = null;
+        $course = null;
         if( $row = $stmt->fetch() ) {
-            $class_object = 
-                new Classes(
-                    $row['classId'],
+            $course = 
+                new Course(
                     $row['courseId'],
-                    $row['startDate'],
-                    $row['endDate'],
-                    $row['trainerId'],
-                    $row['classSize']);
+                    $row['courseName']);
         }
 
         // STEP 5
@@ -81,45 +69,7 @@ class ClassDAO {
         $conn = null;
 
         // STEP 6
-        return $class_object;
-    }
-
-    public function getAllClasses($courseId) {
-        // STEP 1
-        $connMgr = new ConnectionManager();
-        $conn = $connMgr->connect();
-
-        // STEP 2
-        $sql = "SELECT
-                    *
-                FROM class
-                WHERE 
-                    courseId = :id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $courseId, PDO::PARAM_INT);
-
-        // STEP 3
-        $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-        $classes = []; // Indexed Array of Post objects
-        while( $row = $stmt->fetch() ) {
-            $classes[] =
-                new Classes(
-                    $row['classId'],
-                    $row['courseId'],
-                    $row['startDate'],
-                    $row['endDate'],
-                    $row['trainerId'],
-                    $row['classSize']);
-        }
-
-        // STEP 5
-        $stmt = null;
-        $conn = null;
-
-        // STEP 6
-        return $classes;
+        return $course;
     }
 
     public function update($id, $startDate, $endDate, $trainerId, $classSize, $courseName) {
@@ -195,7 +145,7 @@ class ClassDAO {
                         endDate, 
                         trainerId, 
                         classSize, 
-                        
+                        courseName
                     )
                 VALUES
                     (
@@ -203,7 +153,8 @@ class ClassDAO {
                         :startDate, 
                         :endDate, 
                         :trainerId, 
-                        :classSize,           
+                        :classSize, 
+                        :courseName
                     )";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -211,6 +162,7 @@ class ClassDAO {
         $stmt->bindParam(':endDate', $endDate, PDO::PARAM_STR);
         $stmt->bindParam(':trainerId', $trainerId, PDO::PARAM_INT);
         $stmt->bindParam(':classSize', $classSize, PDO::PARAM_INT);
+        $stmt->bindParam(':courseName', $courseName, PDO::PARAM_STR);
 
         //STEP 3
         $status = $stmt->execute();

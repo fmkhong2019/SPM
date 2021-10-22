@@ -35,37 +35,39 @@
     <!-- End of Assign Engineers -->
 
     <!-- Section - Hidden From - Assign -->
+    <form method="get" action="assignProcess.php" class="m-2">
     <div id="hidden-form-assign">
-      <form class="m-2">
       <div class="form-group">
           <label for="eId">Employee ID</label>
-          <input type="text" id="assign-form-eid" class="form-control" placeholder="Employee ID">
+          <input type="text" id="assign-form-eid" name="employeeId" class="form-control" placeholder="Employee ID">
         </div>
         <div class="form-group">
           <label for="courseName">Name</label>
-          <input type="text" id="assign-form-name" class="form-control" placeholder="Employee Name">
+          <input type="text" id="assign-form-name" name="name" class="form-control" placeholder="Employee Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="courseName">Course ID</label>
+          <input type="number" id="courseId" name="courseId" class="form-control" name="courseId", min="1" max="2">
         </div>
         <div class="form-group">
           <label for="courseID">Course Name</label>
-          <select name="course" id="course" class="form-control">
-            <option selected value="Fundamentals of Xerox">Fundamentals of Xerox</option>
+          <select name="course" id="courseName" class="form-control" name="courseName">
+            <option selected value="Fundamentals of Xerox">Fundamentals of Xerox WorkCenter 7845</option>
             <option value="Programming for Xerox WorkCenter">Programming for Xerox WorkCenter</option>
             <option value="course3">...</option>
             <option value="course4">...</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="courseName">Class ID</label>
-          <input type="text" id="classId" class="form-control" placeholder="101, 102, 103">
-        </div>
-        <div class="form-group">
           <label for="email">What do you assign as</label>
-          <select name="category" id="category" class="form-control">
+          <select name="category" id="category" class="form-control" name="category">
             <option value="trainer">Trainer/Senior</option>
             <option value="learner">Learner/Junior</option>
           </select>
         </div>
-        <button type="button" class="btn btn-primary" id="btn-insert" onclick="insert()">Assign enginner to class</button>
+        <input type="submit" class=" btn btn-primary" value="Assign Engineer to Course">
+        <!--button type="button" class="btn btn-primary" id="btn-insert" onclick="insert()">Assign enginner to class</button-->
       </form>
     </div>
     <!--End of Assign Form-->
@@ -73,20 +75,34 @@
     
     <br>
 
-    <h1>View Class</h1>
+    <h1>View Courses</h1>
     <hr>
     <h4>Search by Course name / ID: </h4>
     <label for="name">Course name / ID: </label>
     <input type="text" id="name">
 
-    <table id="engineer-table" class="table table-striped m-2">
-      <tr><th>Course Name</th><th>Class ID</th><th>Start Date</th><th>End Date</th><th>Trainer</th><th>classSize</th><th></th></tr>
+    <table id="course-table" class="table table-striped m-2">
+      <tr><th>Course ID</th><th>Course Name</th><th></th></tr>
+      <?php
+         $courseDAO = new CourseDAO();
+         $courses = $courseDAO->getAll();
+       
+        foreach($courses as $course){
+          echo "<tr><th>".$course->courseId."</td><td>".$course->name."</td><td><button type='button' id='".$course->courseId."'"."class='btn btn-primary' onclick='viewCourse(this)'>View Details</button></td></tr>";
+        }
+        
+      ?>
+    </table>
+
+
+    <table id="class-table" class="table table-striped m-2">
+      <tr><th>Class ID</th><th>Course ID</th><th>Start Date</th><th>End Date</th><th>Trainer ID</th><th>classSize</th><th></th></tr>
       <?php
          $classDAO = new ClassDAO();
          $classes = $classDAO->getAll();
        
         foreach($classes as $class){
-          echo "<tr><th>".$class->courseName."</td><td>".$class->classid."</td><td>".$class->startDate."</td><td>".$class->endDate."</td><td>".$class->trainerId."</td>"."</td><td>".$class->classSize."</td><td><button type='button' id='".$class->classid."'"."class='btn btn-primary' data-toggle='popover' data-placement='top' title='Registered Engineers' data-content='name1, name2, name3, name4, name5, name6, name7,name8...'>View registered engineers</button></td></tr>";
+          echo "<tr><th>".$class->courseId."</td><td>".$class->classId."</td><td>".$class->startDate."</td><td>".$class->endDate."</td><td>".$class->trainerId."</td>"."</td><td>".$class->classSize."</td><td><button type='button' id='".$class->classId."'"."class='btn btn-primary' data-toggle='popover' data-placement='top' title='Registered Engineers' data-content='name1, name2, name3, name4, name5, name6, name7,name8...'>View registered engineers</button></td></tr>";
         }
         
         ?>
@@ -96,6 +112,7 @@
      
     //document.getElementById("btn-insert").addEventListener("click", insert());
     document.getElementById("hidden-form-assign").style.display = "none";
+    document.getElementById("class-table").style.display = "none";
     var Id_container="";
     var name_container="";
     var learnerList =[];
@@ -126,10 +143,16 @@
 
     function edit(e){
       if(confirm("Are you sure editing this engieer?")){
-        
+        window.location.replace("editEngineer.php");
         }else{
         
         }
+    }
+
+    function viewCourse(e){
+      
+      document.getElementById("class-table").style.display = "block";
+      window.scrollBy(0, 300);
     }
 
     function insert(){

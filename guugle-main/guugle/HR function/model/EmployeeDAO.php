@@ -105,40 +105,6 @@ require_once 'common.php';
             // STEP 5
             return $status;
         }
-
-        public function update($id, $subject, $entry, $mood) {
-
-            // STEP 1
-            $connMgr = new ConnectionManager();
-            $conn = $connMgr->connect();
-    
-            // STEP 2
-            $sql = "UPDATE
-                        post
-                    SET
-                        update_timestamp = CURRENT_TIMESTAMP,
-                        subject = :subject,
-                        entry = :entry,
-                        mood = :mood
-                    WHERE 
-                        id = :id";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->bindParam(':subject', $subject, PDO::PARAM_STR);
-            $stmt->bindParam(':entry', $entry, PDO::PARAM_STR);
-            $stmt->bindParam(':mood', $mood, PDO::PARAM_STR);
-    
-            //STEP 3
-            $status = $stmt->execute();
-            
-            // STEP 4
-            $stmt = null;
-            $conn = null;
-    
-            // STEP 5
-            return $status;
-        }
-    
         
         public function deleteEmployee($id){
             $connMgr = new ConnectionManager();

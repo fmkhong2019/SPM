@@ -9,13 +9,13 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Remove Engineer</title>
+    <title>Edit Engineer</title>
 </head>
 <body>
   <!-- add or modify code as necessary -->
-  <h1>Remove Engineer account</h1>
-  <form method="get" action="removeProcess.php" class="m-2">
-    <div class="form-group">
+  <h1>Edit Engineer account</h1>
+  <form method="get" action="editProcess.php" class="m-2">
+  <div class="form-group">
       <label for="employeeID">Employee ID</label>
       <input type="text" id="id" name="id" class="form-control">
     </div>
@@ -24,10 +24,20 @@
       <input type="text" id="name" name="name" class="form-control">
     </div>
     <div class="form-group">
-      <label for="email">Admin password</label>
-      <input type="password" id="pw" name="pw" class="form-control">
+      <label for="email">Phone Number</label>
+      <input type="text" id="phone" name="phone" class="form-control">
     </div>
-    <input type="submit" class=" btn btn-danger" value="Remove">
+    <div class="form-group">
+      <label for="date">Date joined</label>
+      <input type="date" class="form-control" name="date" 
+        placeholder="yyyy-mm-dd" value=""
+        min="1997-01-01" max="2030-12-31" id="date" name="date">
+    </div>
+    <div class="form-group">
+      <label for="name">Address</label>
+      <input type="text" id="address" class="form-control" name="address">
+    </div>
+    <input type="submit" class=" btn btn-warning" value="Edit">
   </form>
      
 

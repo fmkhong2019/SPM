@@ -1,24 +1,28 @@
 <?php
 
-class Classe {
-    public $classid;
+class Classes {
+    public $classId;
+    public $courseId;
     public $startDate;
     public $endDate;
     public $trainerId;
     public $classSize;
-    public $courseName;
 
-    public function __construct($classid, $startDate, $endDate, $trainerId, $classSize, $courseName) {
-        $this->classid = $classid;
+    public function __construct($classId, $courseId, $startDate, $endDate, $trainerId, $classSize) {
+        $this->classId = $classId;
+        $this->courseId = $courseId;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->trainerId = $trainerId;
         $this->classSize = $classSize;
-        $this->courseName = $courseName;
     }
 
-    public function getID() {
-        return $this->classid;
+    public function getCourseId() {
+        return $this->courseId;
+    }
+
+    public function getClassId() {
+        return $this->classId;
     }
 
     public function getStartDate() {
