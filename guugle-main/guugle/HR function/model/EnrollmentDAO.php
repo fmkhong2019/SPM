@@ -117,6 +117,68 @@ class EnrollmentDAO {
  
 
     }
+
+    public function getNumberOfStudents($id) {
+        // STEP 1
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+
+        // STEP 2
+        $sql = "SELECT COUNT(engineerId) FROM enrollment WHERE classId = :classId";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':classId', $id, PDO::PARAM_INT);
+
+        //STEP 3
+        $status = $stmt->execute();
+        $count = $stmt->fetchColumn();
+        
+        // STEP 4
+        $stmt = null;
+        $conn = null;
+
+        // STEP 5
+        return $count;
+    }
+
+    public function getEnrollments($classId) {
+        // STEP 1
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+
+        // STEP 2
+        $sql = "SELECT
+                   *
+                FROM enrollment
+                WHERE classId = :cid"; 
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindParam(':cid', $classId, PDO::PARAM_INT);
+
+        // STEP 3
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        // STEP 4
+        $enrollments = []; 
+        while( $row = $stmt->fetch() ) {
+            $enrollments[] =
+                new Enrollment(
+                    $row['engineerId'],
+                    $row['classId'],
+                    $row['completedDate'],
+                    $row['completed'],
+                    $row['enrolledDate'],
+                    $row['progress']
+                );
+        }
+
+        // STEP 5
+        $stmt = null;
+        $conn = null;
+
+        // STEP 6
+        return $enrollments;
+    }
 // ALL BELOW ARE FROM PAST PROJECT , USE AS REFERENCE
 //     public function checkUser($id) {
 

@@ -187,6 +187,8 @@ require_once 'common.php';
             // STEP 6
             return $employee_object;
         }
+
+        
     }
 
     //$dao = new EmployeeDAO();

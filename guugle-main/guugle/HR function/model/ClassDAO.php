@@ -75,11 +75,9 @@ class ClassDAO {
                     $row['trainerId'],
                     $row['classSize']);
         }
-
         // STEP 5
         $stmt = null;
         $conn = null;
-
         // STEP 6
         return $class_object;
     }
@@ -221,6 +219,38 @@ class ClassDAO {
 
         // STEP 5
         return $status;
+    }
+
+    public function updateTrainer($classId, $trainerId) {
+
+        // STEP 1
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+
+        // STEP 2
+        $sql = "UPDATE
+                        class
+                    SET
+                        trainerId=:tid
+                    WHERE 
+                        classId=:cid";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':tid', $trainerId, PDO::PARAM_INT);
+        $stmt->bindParam(':cid', $classId, PDO::PARAM_INT);
+        
+
+        //STEP 3
+        $status = $stmt->execute();
+        
+        // STEP 4
+        $stmt = null;
+        $conn = null;
+
+        // STEP 5
+        return $status;
+
+       
     }
 }
 ?>
