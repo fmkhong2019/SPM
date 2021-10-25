@@ -29,6 +29,37 @@ class CourseDAO {
                 new Course(
                     $row['courseId'],
                     $row['courseName'],
+                    $row['courseDescription']
+                );
+        
+        }
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
+ 
+
+    }
+    public function getAllCourses() {
+        $conn = new ConnectionManager();
+        $pdo = $conn->getConnection();
+
+        $sql = "SELECT * FROM course";
+
+        $stmt = $pdo->prepare($sql);
+    
+        
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        
+        $result = [];
+        // $post_object = null;
+        while( $row = $stmt->fetch() ) {
+            $result[] = 
+                new Course(
+                    $row['courseId'],
+                    $row['courseName'],
+                    $row['courseDescription']
                 );
         
         }

@@ -5,9 +5,11 @@ class Course {
     public $coursename;
 
     
-    public function __construct($courseid, $coursename) {
+    public function __construct($courseid, $coursename,$coursedesc) {
         $this->courseid = $courseid;
         $this->coursename = $coursename;
+        $this->coursedesc = $coursedesc;
+        
         }
 
     public function getcourseid() {
@@ -16,6 +18,9 @@ class Course {
 
     public function getcoursename() {
         return $this->coursename;
+    }
+    public function getcoursedesc() {
+        return $this->coursedesc;
     }
 
 }
