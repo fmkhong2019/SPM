@@ -94,6 +94,7 @@ button:hover, a:hover {
 
 <div class="container">
 <h2 style="margin-top:12%;">Available Courses</h2>
+<hr>
     <div class="row" style="margin-top:10%;margin-left:10%;" id='main' >
 
 
@@ -115,12 +116,12 @@ request.onreadystatechange = function() {
        
         for (var node of result.course){
             document.getElementById("main").innerHTML+=  `
-            <div class="col-sm-6">
+            <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">${node.coursename} </h5></h5>
         <p class="card-text " >Course Code: ${node.courseid} <br>
-        ${node.coursedesc}</p>
+       <i>${node.coursedesc}</i> <br><b>Pre-Requisites:</b> ${node.prereq}</p>
         <a href="./Createquiz.php?id=${node.courseid}" class="btn btn-primary">View Classes</a>
       </div>
     </div>

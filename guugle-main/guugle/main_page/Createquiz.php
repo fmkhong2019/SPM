@@ -129,8 +129,10 @@ $_SESSION['quizclass']=$classId;
   <label for="volume" class='form-label'>Minutes</label>
 </div>
 <div class='form-group'>
-    <input type="submit"  id="submit" name="submit" class="form-control btn btn-success" >
+    <input type="submit"   id="submit" name="submit" class="form-control btn btn-success" >
+
     </div>
+    <a href='#' class='form-control btn btn-primary'>Finish Quiz</a>
     </form>
     </div>
  

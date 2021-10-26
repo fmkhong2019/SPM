@@ -40,6 +40,43 @@ class CourseDAO {
  
 
     }
+    public function getPreReq($courseid){
+        
+        $conn = new ConnectionManager();
+        $pdo = $conn->getConnection();
+        $pdo2 = $conn->getConnection();
+
+        $sql = "SELECT preRequisiteCourseId FROM Pre_Requisite where courseId = :course";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':course', $courseid, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result =0;
+        // $post_object = null;
+        $row = $stmt->fetch() ;
+        if($row==TRUE){
+            $result=intval($result);
+            $result=$row['preRequisiteCourseId'];
+            $final=$this->getCourse($result);
+            }
+            else{
+            $final=0;
+            }
+        
+      
+        
+        
+       
+
+        $stmt = null;
+      
+        $pdo = null;
+
+        return $final;
+
+
+    }
+
     public function getAllCourses() {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();

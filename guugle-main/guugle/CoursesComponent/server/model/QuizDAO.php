@@ -46,6 +46,24 @@
         return $result;
 
     }
+    public function quiztotaltime($sectionId,$classId){
+        $conn = new ConnectionManager();
+        $pdo = $conn->getConnection();
+        $sql='SELECT SUM(duration) AS Duration FROM quiz where sectionId=:sec and classId=:class';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':sec', $sectionId, PDO::PARAM_INT);
+        $stmt->bindParam(':class', $classId, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $result = 0;
+        $row = $stmt->fetch();
+        $result=$row['Duration'];
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
+
+    }
 }
 
 
