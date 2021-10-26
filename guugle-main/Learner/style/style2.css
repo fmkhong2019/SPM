@@ -1,0 +1,30 @@
+:root {
+    font-size: 16px;
+    font-family: 'Open Sans';
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
+    --bg-primary: #23232e;
+    --bg-secondary: #141816;
+    --transition-speed: 600ms;
+    }
+
+
+
+.nav {
+    background-color: black !important;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-item:last-child {
+    margin-right: 0;
+    }
+
+main {
+    margin-top: 5rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
