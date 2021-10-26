@@ -4,8 +4,7 @@
         public function AddQuestion($sectionId,$classId ,$question ,$types ,$Answer1 ,$Answer2,$Answer3,$Answer4,$correctAnswer,$duration) {
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
-            $sql = "INSERT INTO quiz VALUES(:sec,:class,:question,:types,:ans1,:ans2,:ans3,:ans4,:correct,:duration)";
-    
+            $sql = "INSERT INTO quiz (`sectionId`, `classId`, `question`, `type`, `Answer1`, `Answer2`, `Answer3`, `Answer4`, `correctAnswer`, `duration`) VALUES(:sec,:class,:question,:types,:ans1,:ans2,:ans3,:ans4,:correct,:duration)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':sec', $sectionId, PDO::PARAM_INT);
             $stmt->bindParam(':class', $classId, PDO::PARAM_INT);
@@ -20,8 +19,6 @@
             
             $isOk = $stmt->execute();
 
-          
-        
             $stmt = null;
             $pdo = null;
         
@@ -29,7 +26,8 @@
 
     }
 
-    public function getUpdatedList($section,$classId){
+
+    public function getUpdatedList($sectionId,$classId){
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
         $sql='SELECT * FROM quiz where sectionId=:sec and classId=:class';

@@ -2,7 +2,7 @@
 <?php
 session_start();
 $section=1;
-$classId=2;
+$classId=1;
 
 $_SESSION['quizsec']=$section;
 $_SESSION['quizclass']=$classId;
@@ -175,6 +175,7 @@ function change(){
        
         
     }
+
     function change2(){
         document.getElementById('answers').innerHTML='';
     }

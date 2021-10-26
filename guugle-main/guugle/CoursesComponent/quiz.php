@@ -34,7 +34,7 @@
                             {
                                 type: "radiogroup",
                                 name: "SPM-1",
-                                title: "When created Linux?",
+                                title: "Who created Linux?",
                                 choicesOrder: "random",
                                 choices: [
                                     "Steve Jobs", "Subhajit Datta", "Zhou Kan Kan", "Linus Torvalds"
@@ -81,6 +81,7 @@
                     document
                         .querySelector('#surveyResult')
                         .textContent = "Result JSON:\n" + JSON.stringify(sender.data, null, 3);
+                    console.log(sender);
                 });
 
             survey.render("surveyElement");

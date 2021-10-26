@@ -1,7 +1,6 @@
 <?php
 
 class Quiz{
-    public $quizId ;
     public $questionId ;
     public $sectionId ;
     public $classId ;
@@ -28,9 +27,6 @@ class Quiz{
 
 
     }
-    public function getquizId() {
-        return $this->quizId;
-    }
     public function getquestionId() {
         return $this->questionId;
     }
@@ -43,7 +39,7 @@ class Quiz{
     public function getquestion() {
         return $this->question;
     }
-    public function gettype() {
+    public function getQuestionType() {
         return $this->type;
     }
     public function getAnswer1() {
@@ -64,8 +60,6 @@ class Quiz{
     public function getduration() {
         return $this->duration;
     }
-
-
 }
 
 ?>
