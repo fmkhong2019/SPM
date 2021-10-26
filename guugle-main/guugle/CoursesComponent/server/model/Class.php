@@ -6,13 +6,15 @@ class Classes{
     public $startdate;
     public $enddate;
     public $trainerid;
+    public $classsize;
     
-    public function __construct($courseid,$classid,$startdate,$enddate,$trainerid) {
+    public function __construct($courseid,$classid,$startdate,$enddate,$trainerid, $classsize) {
         $this->courseid = $courseid;
         $this->classid = $classid;
         $this->startdate = $startdate;
         $this->enddate = $enddate;
-        $this->trainerid=$trainerid;    
+        $this->trainerid=$trainerid;   
+        $this->classsize=$classsize; 
     }
 
     public function getcourseid() {
@@ -32,7 +34,10 @@ class Classes{
     }
     public function gettrainerid(){
         return $this->trainerid;
-    }    
+    }   
+    public function getclasssize(){
+        return $this->classsize;
+    }     
     }
 
 
