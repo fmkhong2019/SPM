@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+session_start();
+$courseId=$_GET["id"];
+//$employeeId = $_SESSION["id"];
+$employeeId = 1;
+
+$_SESSION['courseId']=$courseId;
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -93,42 +101,66 @@ button:hover, a:hover {
     </nav>
 
 <div class="container">
-<h2 style="margin-top:12%;">Available Courses</h2>
+<h2 style="margin-top:12%;">Available Classes</h2>
     <div class="row" style="margin-top:10%;margin-left:10%;" id='main' >
-
-
 </div>
 </div>
 </div>
-
-       
+<input type="hidden" id="classId" name="postId" value="">
+<div class="modal fade" id="enrolModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request for Enrollment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Click on Confirm and your request will be sent to the HR Administrator for approval.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <a id="confirm" href=""><button type="button" class="btn btn-primary">Confirm</button></a>
+      </div>
+    </div>
+  </div>
+</div>
      
                 
 </body>
 <script>
-    var url = "../CoursesComponent/server/helper/getCourse.php";
-var request = new XMLHttpRequest();
-request.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
- 
-        var result = JSON.parse(this.responseText);
-       
-        for (var node of result.course){
-            document.getElementById("main").innerHTML+=  `
-            <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">${node.coursename} </h5></h5>
-        <p class="card-text " >Course Code: ${node.courseid} <br>
-        ${node.coursedesc}</p>
-        <a href="./View_Classes.php?id=${node.courseid}" class="btn btn-primary">View Classes</a>
-      </div>
-    </div>
+    function passval(value){
+        document.getElementById("confirm").setAttribute('href', "../CoursesComponent/server/helper/requestEnroll.php?courseId=<?php echo $courseId;?>&classId=" +value+ "&employeeId=<?php echo $employeeId;?>");
+    }
+    var url = "../CoursesComponent/server/helper/getClass.php";
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.warn(this.responseText)
+            var result = JSON.parse(this.responseText);
+        
+            for (var node of result.class){
+                var classsize = 0;
+                if(node.classsize != null){
+                    classsize = node.classsize;
+                }
+                document.getElementById("main").innerHTML+=  `
+                <div class="col-sm-6">
+                    <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Class #${node.classid} </h5></h5>
+                    <p class="card-text " >Start Date: ${node.startdate} <br>
+                    End Date: ${node.enddate}</p>
+                    Class Size: ${classsize}
+                    <button type="button" value=${node.classid} onclick=passval(this.value) class="btn btn-primary" data-toggle="modal" data-target="#enrolModal"> Request Enrol </button>
+                    </div>
+                </div>
 
-`;
+    `;
+            }
         }
     }
-}
 request.open('GET', url, true);
 request.send();
 
