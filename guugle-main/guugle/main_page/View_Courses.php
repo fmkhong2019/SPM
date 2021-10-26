@@ -112,7 +112,7 @@ request.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
  
         var result = JSON.parse(this.responseText);
-      
+       
         for (var node of result.course){
             document.getElementById("main").innerHTML+=  `
             <div class="col-sm-6">

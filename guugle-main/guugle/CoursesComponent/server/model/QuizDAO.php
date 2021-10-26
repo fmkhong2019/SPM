@@ -43,7 +43,7 @@
         $stmt = null;
         $pdo = null;
 
-            return $result;
+        return $result;
 
     }
 }

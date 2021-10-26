@@ -78,7 +78,7 @@ $_SESSION['quizclass']=$classId;
     <div class='container' style='margin-top:10%;'>
     <div class='row'>
     <div class='col-md-6'>
-    <form method='post' action='../CoursesComponent/server/helper/addQuiz.php'>
+    <form method='post' action='../CoursesComponent/server/helper/getQuiz.php'>
     <div class='form-group'>
     <div class="form-row mb-2">
     <div class="col">
@@ -153,6 +153,25 @@ $_SESSION['quizclass']=$classId;
 
 </html>
 <script>
+ let url = "../CoursesComponent/server/helper/getQuiz.php";
+var request = new XMLHttpRequest();
+request.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+console.log(this.responseText);
+        var data = JSON.parse(this.responseText);
+      
+        for (var node of data.quiz){
+            document.getElementById("list").innerHTML+=  `
+            <li><b>Question:</b>&nbsp;${node.question}&nbsp;<b>Type:</b> &nbsp;${node.type}&nbsp;<b>Answer:</b>&nbsp;${node.correctAnswer}</li>
+
+`;
+        }
+    }
+}
+request.open('GET', url, true);
+request.send();
+
 function change(){
 
           
@@ -181,27 +200,4 @@ function change(){
     }
 
  
-    var url = "../CoursesComponent/server/helper/addQuiz.php";
-var request = new XMLHttpRequest();
-request.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
- 
-        var result = JSON.parse(this.responseText);
-    
-    console.log(result);
-        for (var node of result.quiz){
-            document.getElementById("list").innerHTML+=  `
-           <li>${node.question}<br>${node.type}</li>
-
-`;
-        }
-    }
-}
-request.open('GET', url, true);
-request.send();
-
-      
-
-
-
 </script>
