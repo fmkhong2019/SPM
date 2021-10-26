@@ -121,7 +121,7 @@ request.onreadystatechange = function() {
       <div class="card-body">
         <h5 class="card-title">${node.coursename} </h5></h5>
         <p class="card-text " >Course Code: ${node.courseid} <br>
-        ${node.coursedesc}</p>
+      <i> ${node.coursedesc}</i> <br><b>Pre Requisites:</b> ${node.prereq}</p>
         <a href="./View_Classes.php?id=${node.courseid}" class="btn btn-primary">View Classes</a>
       </div>
     </div>
