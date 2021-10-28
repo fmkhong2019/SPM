@@ -40,30 +40,36 @@ require_once 'common.php';
             return $employees;
         }
 
-        public function addEmployee($name, $phoneNumber, $dateJoined, $address){
+        public function addEmployee($employeeId, $name, $phoneNumber, $dateJoined, $address, $pw){
             $connMgr = new ConnectionManager();
             $conn = $connMgr->connect();
             
             $sql = "INSERT INTO employee
             (
+                employeeId,
                 name, 
                 phoneNumber, 
                 dateJoined, 
-                address
+                address,
+                password
             )
             VALUES
-            (
+            (   
+                :employeeId,
                 :name,
                 :phoneNumber,
                 :dateJoined,
-                :address
+                :address,
+                :password
             )";
 
             $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmt->bindParam(':phoneNumber', $phoneNumber, PDO::PARAM_INT);
             $stmt->bindParam(':dateJoined', $dateJoined, PDO::PARAM_STR);
             $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $pw, PDO::PARAM_STR);
 
             $status = $stmt->execute();
             

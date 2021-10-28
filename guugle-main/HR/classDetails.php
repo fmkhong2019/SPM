@@ -24,6 +24,41 @@
 </head>
 <body>
   <!-- add or modify code as necessary -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
+        <a href="../../index.html" class="navbar-brand"><img src="" style="width: 100px; height: auto;">LMS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hamburger">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="hamburger">
+            <ul class="navbar-nav ml-auto">
+                <!-- <li class="nav-item">
+                    <a href="home.html" class="nav-link">Home</a>
+                    
+                </li> -->
+             
+               
+                <li class="nav-item">
+                  <a href= "./guugle-main/HR/Home.php"  class="nav-link">HR Portal</a>
+                </li>
+                
+                <li class="nav-item">
+                  <!-- LinkedIn Hidden Inputs -->
+                  <form method='get' action='https://www.linkedin.com/oauth/v2/authorization' class="form-inline">
+                    <input type='hidden' name='response_type' value = 'code'>
+                    <input type='hidden' name='client_id' value = '868ixxuf9za2rx'>
+                    <input type='hidden' name='redirect_uri' value = 'http://localhost/dataspm/server/helper/callback.php'>
+                    <!-- <input type='hidden' name='state' value = 'DCEeFWf45A53sdfKef424'>  -->
+                    <input type='hidden' name='scope' value = 'r_liteprofile,r_emailaddress'>
+
+                    <button href="#" type='submit' class="nav-link" style="background-color: transparent; border: none; text-transform: uppercase; letter-spacing: .1rem;">Logged In</button>
+                  </form>  
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
   <h1 class=mx-2>Class Details for <?php echo $classId?></h1>
   <h3 class=mx-2>Under the Course: <?php echo $courseName?> (Course Id:<?php echo $class_obj->courseId?>)</h3>
   <br>
@@ -41,9 +76,13 @@
       <tr><th>Learner ID</th><th>Learner Name</th><th>Learner Phone</th><th>Learner Address</th></tr>
       <?php
         foreach($enrollments as $enrollment){
-          $eid = $enrollment->getengineerid();
-          $emp = $employeeDAO->findById($eid);
-          echo "<tr><td>$emp->_employeeId</td><td>$emp->_name</td><td>$emp->_phoneNumber</td><td>$emp->_address</td></tr>";
+          if(!is_null($enrollment)){
+            $eid = $enrollment->getengineerid();
+            $emp = $employeeDAO->findById($eid);
+            if(!is_null($emp)&&$eid!=$class_obj->trainerId){
+              echo "<tr><td>$emp->_employeeId</td><td>$emp->_name</td><td>$emp->_phoneNumber</td><td>$emp->_address</td></tr>";  
+            }
+          }
         }
       ?> 
   </table>

@@ -13,6 +13,42 @@
 </head>
 <body>
   <!-- add or modify code as necessary -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
+        <a href="../../index.html" class="navbar-brand"><img src="" style="width: 100px; height: auto;">LMS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hamburger">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="hamburger">
+            <ul class="navbar-nav ml-auto">
+                <!-- <li class="nav-item">
+                    <a href="home.html" class="nav-link">Home</a>
+                    
+                </li> -->
+             
+               
+                
+                <li class="nav-item">
+                  <a href= "./guugle-main/HR/Home.php"  class="nav-link">HR Portal</a>
+                </li>
+                
+                <li class="nav-item">
+                  <!-- LinkedIn Hidden Inputs -->
+                  <form method='get' action='https://www.linkedin.com/oauth/v2/authorization' class="form-inline">
+                    <input type='hidden' name='response_type' value = 'code'>
+                    <input type='hidden' name='client_id' value = '868ixxuf9za2rx'>
+                    <input type='hidden' name='redirect_uri' value = 'http://localhost/dataspm/server/helper/callback.php'>
+                    <!-- <input type='hidden' name='state' value = 'DCEeFWf45A53sdfKef424'>  -->
+                    <input type='hidden' name='scope' value = 'r_liteprofile,r_emailaddress'>
+
+                    <button href="#" type='submit' class="nav-link" style="background-color: transparent; border: none; text-transform: uppercase; letter-spacing: .1rem;">Logged In</button>
+                  </form>  
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
   <h1>Edit Engineer account</h1>
   <form method="get" action="editProcess.php" class="m-2">
   <div class="form-group">

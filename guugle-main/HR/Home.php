@@ -14,7 +14,48 @@
 </head>
 <body>
   <!-- Section - Assign Engineers -->
-  <h1>Assign engineers</h1>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
+        <a href="../../index.html" class="navbar-brand"><img src="" style="width: 100px; height: auto;">LMS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hamburger">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="hamburger">
+            <ul class="navbar-nav ml-auto">
+                <!-- <li class="nav-item">
+                    <a href="home.html" class="nav-link">Home</a>
+                    
+                </li> -->
+             
+               
+                
+                <li class="nav-item">
+                  <a href= "./guugle-main/HR/Home.php"  class="nav-link">HR Portal</a>
+                </li>
+                
+                <li class="nav-item">
+                  <!-- LinkedIn Hidden Inputs -->
+                  <form method='get' action='https://www.linkedin.com/oauth/v2/authorization' class="form-inline">
+                    <input type='hidden' name='response_type' value = 'code'>
+                    <input type='hidden' name='client_id' value = '868ixxuf9za2rx'>
+                    <input type='hidden' name='redirect_uri' value = 'http://localhost/dataspm/server/helper/callback.php'>
+                    <!-- <input type='hidden' name='state' value = 'DCEeFWf45A53sdfKef424'>  -->
+                    <input type='hidden' name='scope' value = 'r_liteprofile,r_emailaddress'>
+
+                    <button href="#" type='submit' class="nav-link" style="background-color: transparent; border: none; text-transform: uppercase; letter-spacing: .1rem;">Logged In</button>
+                  </form>  
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+  <h1 class="float-left">Assign engineers</h1>
+  <?php
+    $waitListDAO = new WaitlistDAO();
+    $waitlists = $waitListDAO->getWaitlist();
+  ?>
+  <a href="./approveEngineer.php" class="float-right"><button type='button' class='btn btn-warning m-3'>Pending Task(<?php echo count($waitlists);?>)</button></a><br><br>
   <hr>
   <h4>Search by name or employee ID below: </h4>
   <label for="name">Name / Employee ID: </label>
@@ -47,15 +88,28 @@
         </div>
         <div class="form-group">
           <label for="courseName">Course ID</label>
-          <input type="number" id="courseId" name="courseId" class="form-control", min="1" max="2">
+          <select name="courseId" id="courseId" class="form-control">
+          <?php
+            $courseDAO = new CourseDAO();
+            $courses = $courseDAO->getAll();
+        
+            foreach($courses as $course){
+              echo "<option value=$course->getCourseID()>".$course->courseId."</option>";
+            }
+        
+          ?>
+          </select>
         </div>
         <div class="form-group">
           <label for="courseID">Course Name</label>
           <select name="courseName" id="courseName" class="form-control">
-            <option selected value="Fundamentals of Xerox">Fundamentals of Xerox WorkCenter 7845</option>
-            <option value="Programming for Xerox WorkCenter">Programming for Xerox WorkCenter</option>
-            <option value="course3">...</option>
-            <option value="course4">...</option>
+          <?php
+        
+            foreach($courses as $course){
+              echo "<option value=$course->getCourseName()>".$course->name."</option>";
+            }
+        
+          ?>
           </select>
         </div>
         <div class="form-group">
@@ -100,10 +154,10 @@
     <table id="course-table" class="table table-striped m-2">
       <tr><th>Course ID</th><th>Course Name</th><th></th></tr>
       <?php
-         $courseDAO = new CourseDAO();
-         $courses = $courseDAO->getAll();
+         $courseDAO2 = new CourseDAO();
+         $courses2 = $courseDAO2->getAll();
        
-        foreach($courses as $course){
+        foreach($courses2 as $course){
           echo "<tr><th>".$course->courseId."</td><td>".$course->name."</td><td><button type='button' id='".$course->courseId."'"."class='btn btn-primary' onclick='viewCourse(this)'>View Details</button></td></tr>";
         }
         
