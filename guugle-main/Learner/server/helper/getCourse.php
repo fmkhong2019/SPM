@@ -27,6 +27,7 @@
         else{
             foreach($risk as $risks){
                 $name=$risks->getcoursename();
+                $prereqid = $risks->getcourseid();
                 
             
            
@@ -35,9 +36,8 @@
                 "courseid" => $course->getcourseid(),
                 "coursename" => $course->getcoursename(),
                 'coursedesc'=>$course->getcoursedesc(),
-                "prereq" => $name
-            
-              
+                "prereq" => $name,
+                "prereqid" => $prereqid
             );
         }
 

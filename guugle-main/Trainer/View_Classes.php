@@ -2,9 +2,11 @@
 <?php
 session_start();
 $courseId=$_GET["id"];
+$prereqId = $_GET["prereqid"];
 //$employeeId = $_SESSION["id"];
 $employeeId = 1;
-
+$_SESSION['employeeid'] = $employeeId;
+$_SESSION['prereqid'] = $prereqId;
 $_SESSION['courseId']=$courseId;
 ?>
 <html lang="en">
@@ -99,14 +101,18 @@ button:hover, a:hover {
             </ul>
         </div>
     </nav>
-
 <div class="container">
-<h2 style="margin-top:12%;">Available Classes</h2>
+<h2 style="margin-top:12%;">Available Classes</h2> 
     <div class="row" style="margin-top:10%;margin-left:10%;" id='main' >
+    
 </div>
 </div>
+
+<div class="container" id='prereq'>
 </div>
 <input type="hidden" id="classId" name="postId" value="">
+<input type='hidden' id="completed">
+<input type='hidden' id="enrolled">
 <div class="modal fade" id="enrolModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -133,7 +139,54 @@ button:hover, a:hover {
     function passval(value){
         document.getElementById("confirm").setAttribute('href', "../CoursesComponent/server/helper/requestEnroll.php?courseId=<?php echo $courseId;?>&classId=" +value+ "&employeeId=<?php echo $employeeId;?>");
     }
-    var url = "../CoursesComponent/server/helper/getClass.php";
+    var url = "../Learner/server/helper/getPrereqCompletion.php";
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.warn(this.responseText)
+            var result = JSON.parse(this.responseText);
+        
+          if(result.status.length == 0){
+            console.log(result.status);
+            document.getElementById("completed").value = "false";
+          }
+          else{
+            for (var node of result.status){
+                if(node.completed == 1){
+                    console.log(node.completed);
+                    document.getElementById("completed").value = "true";
+                }
+                else{
+                    console.log(node.completed);
+                    document.getElementById("completed").value = "false";
+                }
+            }
+          }
+        }
+    }
+    request.open('GET', url, true);
+    request.send();
+
+    var url = "../Learner/server/helper/getEnrolled.php";
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.warn(this.responseText)
+            var result = JSON.parse(this.responseText);
+        
+          if(result.status.length > 0){
+            console.log(result.status);
+            document.getElementById("enrolled").value = "false";
+          }
+          else{
+            document.getElementById("enrolled").value = "true";
+          }
+        }
+    }
+    request.open('GET', url, true);
+    request.send();
+
+    var url = "../Learner/server/helper/getClass.php";
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -153,16 +206,26 @@ button:hover, a:hover {
                     <p class="card-text " >Start Date: ${node.startdate} <br>
                     End Date: ${node.enddate}</p>
                     Class Size: ${classsize}
-                    <button type="button" value=${node.classid} onclick=passval(this.value) class="btn btn-primary" data-toggle="modal" data-target="#enrolModal"> Request Enrol </button>
+                    <button type="button" id=enrolbtn value=${node.classid} onclick=passval(this.value) class="btn btn-primary" data-toggle="modal" data-target="#enrolModal"> Request Enrol </button>
                     </div>
-                </div>
-
-    `;
+                </div>`;
             }
+            var complete = document.getElementById("completed").value;
+            var enrolled = document.getElementById("enrolled").value;
+            console.log(complete);
+            if (complete == "false" || enrolled == "false"){
+                  var btns = document.getElementsByClassName("btn");
+                  document.getElementById("prereq").innerHTML +=  `Pre-requisite modules not completed for enrollment OR Module has already been completed/in progress`;
+                  for(var btn of btns){
+                    btn.style.display = "none";
+                  }
+                }
         }
     }
 request.open('GET', url, true);
 request.send();
+
+
 
       
 </script>

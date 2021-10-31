@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+//session_start();
+//$courseId=$_GET["id"];
+//$employeeId = $_SESSION["id"];
+$employeeId = 1;
+$_SESSION['employeeid'] = $employeeId;
+
+//$_SESSION['courseId']=$courseId;
+?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" shrink-to-fit="no">
@@ -107,14 +116,21 @@ button:hover, a:hover {
                 
 </body>
 <script>
-    var url = "../CoursesComponent/server/helper/getCourse.php";
+    var url = "../Learner/server/helper/getCourse.php";
 var request = new XMLHttpRequest();
 request.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
  
         var result = JSON.parse(this.responseText);
+        var prereqid = 0;
        
         for (var node of result.course){
+            if (node.prereqid != undefined){
+              prereqid = node.prereqid; 
+            }
+            else{
+              prereqid = 0;
+            }
             document.getElementById("main").innerHTML+=  `
             <div class="col-sm-4">
     <div class="card">
@@ -122,7 +138,7 @@ request.onreadystatechange = function() {
         <h5 class="card-title">${node.coursename} </h5></h5>
         <p class="card-text " >Course Code: ${node.courseid} <br>
       <i> ${node.coursedesc}</i> <br><b>Pre Requisites:</b> ${node.prereq}</p>
-        <a href="./View_Classes.php?id=${node.courseid}" class="btn btn-primary">View Classes</a>
+        <a href="./View_Classes.php?id=${node.courseid}&prereqid=${prereqid}" class="btn btn-primary">View Classes</a>
       </div>
     </div>
 
