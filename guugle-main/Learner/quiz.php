@@ -1,12 +1,14 @@
 <html lang="en">
     <head>
         <title>Quiz Attempt</title><meta name="viewport" content="width=device-width"/>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="https://unpkg.com/knockout@3.5.1/build/output/knockout-latest.js"></script>
         <script src="https://unpkg.com/survey-knockout@1.8.73/survey.ko.min.js"></script>
         <link href="https://unpkg.com/survey-core@1.8.73/modern.min.css" type="text/css" rel="stylesheet"/>
     <body>
         <div id="surveyElement" style="display:inline-block;width:100%;"></div>
         <div id="surveyResult"></div>
+        
         <!-- <script type="text/javascript" src="./index.js"></script> -->
         <script>  
             Survey
@@ -71,6 +73,7 @@
                     }
                 ],
                 completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"
+               
             };
 
             window.survey = new Survey.Model(json);
@@ -80,8 +83,15 @@
                 .add(function (sender) {
                     document
                         .querySelector('#surveyResult')
+                        
                         .textContent = "Result JSON:\n" + JSON.stringify(sender.data, null, 3);
-                    console.log(sender);
+                       
+                   
+                   var data={name:sender.data,sid:'1',cid:'1'};
+                        $.post('../Learner/server/helper/echo.php', data, function(returnedData) {
+    // do something here with the returnedData
+    console.log(returnedData);
+});
                 });
 
             survey.render("surveyElement");

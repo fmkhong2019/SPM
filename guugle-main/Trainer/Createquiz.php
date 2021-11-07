@@ -155,7 +155,7 @@ $_SESSION['quizclass']=$classId;
 
 </html>
 <script>
- let url = "../CoursesComponent/server/helper/getQuiz.php";
+ let url = "../Learner/server/helper/getQuiz.php";
 var request = new XMLHttpRequest();
 request.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

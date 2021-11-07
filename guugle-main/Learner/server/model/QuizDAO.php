@@ -64,7 +64,60 @@
         return $result;
 
     }
+    public function ComputeGrade($section,$class,$question){
+        $conn = new ConnectionManager();
+        $section=intval($section);
+        $class=intval($class);
+        $pdo = $conn->getConnection();
+        $sql = "SELECT * FROM quiz where sectionId=:sec and classId=:class and question=:question ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':sec', $section, PDO::PARAM_INT);
+        $stmt->bindParam(':class', $class, PDO::PARAM_INT);
+        $stmt->bindParam(':question', $question, PDO::PARAM_STR);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+      
+      
+        $result = [];
+        while($row = $stmt->fetch()){
+            $result[] = new Quiz($row['sectionId'],$row['classId'],$row['question'],$row['type'],$row['Answer1'],$row['Answer2'],$row['Answer3'],$row['Answer4'],$row['correctAnswer'],$row['duration']);
+        }
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
+
+     
+        
+    
 }
+public function addGrade($section,$class,$engineer,$score){
+    $conn = new ConnectionManager();
+    $pdo = $conn->getConnection();
+    $sql = "INSERT INTO Attempt (`sectionId`,`classId`,`employeeId`,`score`) VALUES(:sec,:class,:employee,:score) ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':sec', $section, PDO::PARAM_INT);
+    $stmt->bindParam(':class', $class, PDO::PARAM_INT);
+    $stmt->bindParam(':employee', $engineer, PDO::PARAM_INT);
+    $stmt->bindParam(':score', $score, PDO::PARAM_INT);
+
+    
+    $isOk = $stmt->execute();
+
+    $stmt = null;
+    $pdo = null;
+
+    return $isOk;
+
+ 
+    
+
+}
+
+
+    }
 
 
     ?>
