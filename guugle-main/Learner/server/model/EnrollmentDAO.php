@@ -10,13 +10,13 @@ class EnrollmentDAO {
     // Takes $id and returns info 
     #returns null if there is nothing to retrieve
     #Retrieve / get
-    public function getClass($engineerid) {
+    public function getClass($employeeId) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId ";
+        $sql = "SELECT * FROM enrollment  where `employeeId` = :employeeId ";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
+        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
         
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -26,9 +26,8 @@ class EnrollmentDAO {
         while( $row = $stmt->fetch() ) {
             $result[] = 
                 new Enrollment(
-                    $row['engineerId'],
+                    $row['employeeId'],
                     $row['classId'],
-                    $row['courseId'],
                     $row['completedDate'],
                     $row['completed'],
                     $row['enrolledDate'],
@@ -40,17 +39,16 @@ class EnrollmentDAO {
         $pdo = null;
 
         return $result;
- 
 
     }
 
-    public function getProgress($engineerid, $classid) {
+    public function getProgress($employeeId, $classid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId AND `classId` = :classId ";
+        $sql = "SELECT * FROM enrollment  where `employeeId` = :employeeId AND `classId` = :classId ";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
+        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
         $stmt->bindParam(':classId', $classid, PDO::PARAM_STR);
         
         $stmt->execute();
@@ -61,9 +59,8 @@ class EnrollmentDAO {
         if( $row = $stmt->fetch() ) {
             $result[] = 
                 new Enrollment(
-                    $row['engineerId'],
+                    $row['employeeId'],
                     $row['classId'],
-                    $row['courseId'],
                     $row['completedDate'],
                     $row['completed'],
                     $row['enrolledDate'],
@@ -76,44 +73,36 @@ class EnrollmentDAO {
         $pdo = null;
 
         return $result;
- 
 
     }
 
-    public function getCompletion($engineerid, $courseid) {
+    public function updateProgress($employeeId, $classid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId AND `courseId` = :courseId ";
-
+        $sql = "UPDATE enrollment
+            SET progress = progress + 1
+            WHERE `employeeId` = :employeeId AND `classId` = :classId";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
-        $stmt->bindParam(':courseId', $courseid, PDO::PARAM_STR);
-        
-        $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        
-        $result = [];
-        // $post_object = null;
-        if( $row = $stmt->fetch() ) {
-            $result[] = 
-                new Enrollment(
-                    $row['engineerId'],
-                    $row['classId'],
-                    $row['courseId'],
-                    $row['completedDate'],
-                    $row['completed'],
-                    $row['enrolledDate'],
-                    $row['progress']
-                    
-                );
-        
-        }
-        $stmt = null;
-        $pdo = null;
+        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
+        $stmt->bindParam(':classId', $classid, PDO::PARAM_STR);
 
+        $result = $stmt->execute();
         return $result;
- 
+    }
 
+    public function setProgress($employeeId, $classid, $progress) {
+        $conn = new ConnectionManager();
+        $pdo = $conn->getConnection();
+        $sql = "UPDATE enrollment
+            SET progress = :progress
+            WHERE `employeeId` = :employeeId AND `classId` = :classId";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
+        $stmt->bindParam(':classId', $classid, PDO::PARAM_STR);
+        $stmt->bindParam(':progress', $progress, PDO::PARAM_STR);
+
+        $result = $stmt->execute();
+        return $result;
     }
 // ALL BELOW ARE FROM PAST PROJECT , USE AS REFERENCE
 //     public function checkUser($id) {

@@ -42,6 +42,21 @@ class SectionDAO {
 
 
     }
+
+    public function numberOfSections($classId){
+        $conn = new ConnectionManager();
+        $pdo = $conn->getConnection();
+        $sql='SELECT COUNT(*) FROM section where classId=:class';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':class', $classId, PDO::PARAM_INT);
+        $stmt->execute();
+        $number_of_rows = $stmt->fetchColumn();
+        $stmt = null;
+        $pdo = null;
+
+        return $number_of_rows;
+
+    }
 }   
 
 ?>

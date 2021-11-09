@@ -31,7 +31,8 @@ class ClassDAO {
                     $row['classId'],
                     $row['startDate'],
                     $row['endDate'],
-                    $row['trainerId']
+                    $row['trainerId'],
+                    $row['classSize']
                 );
         
         }
