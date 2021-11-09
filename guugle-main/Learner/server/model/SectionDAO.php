@@ -15,7 +15,7 @@ class SectionDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "SELECT * FROM section where `classId` = :classId ";
+        $sql = "SELECT * FROM Section where `classId` = :classId ";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':classId', $classid, PDO::PARAM_STR);
@@ -46,7 +46,7 @@ class SectionDAO {
     public function numberOfSections($classId){
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql='SELECT COUNT(*) FROM section where classId=:class';
+        $sql='SELECT COUNT(*) FROM Section where classId=:class';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':class', $classId, PDO::PARAM_INT);
         $stmt->execute();

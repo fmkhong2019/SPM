@@ -5,7 +5,7 @@
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
             
-            $sql = "SELECT * FROM `material` WHERE `classId` = :classId AND `sectionId` = :sectionId ORDER BY `materialId`";
+            $sql = "SELECT * FROM `Material` WHERE `classId` = :classId AND `sectionId` = :sectionId ORDER BY `materialId`";
 
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':classId', $classId, PDO::PARAM_INT);

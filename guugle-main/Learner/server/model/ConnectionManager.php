@@ -13,7 +13,7 @@ class ConnectionManager {
   }
 
   public function getTestConnection() {
-    $servername = "spm.cpaxvjaqps8a.ap-southeast-1.rds.amazonaws.com";
+    $servername = "";
     $portnumber = "3306";
     $charset = 'utf8';
     $username = "admin";

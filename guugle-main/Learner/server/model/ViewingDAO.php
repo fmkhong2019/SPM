@@ -5,7 +5,7 @@
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
 
-            $sql = "INSERT INTO `viewing` (`employeeId`, `materialId`, `completed`, `latest`) VALUES (:employeeId, :materialId, 0, now())";
+            $sql = "INSERT INTO `Viewing` (`employeeId`, `materialId`, `completed`, `latest`) VALUES (:employeeId, :materialId, 0, now())";
 
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
@@ -21,7 +21,7 @@
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
     
-            $sql = "SELECT * FROM `viewing` WHERE `materialId` = :materialId AND `employeeId` = :employeeId";
+            $sql = "SELECT * FROM `Viewing` WHERE `materialId` = :materialId AND `employeeId` = :employeeId";
     
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':materialId', $materialId, PDO::PARAM_INT);
@@ -56,7 +56,7 @@
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
             
-            $sql = "UPDATE `viewing`
+            $sql = "UPDATE `Viewing`
             SET `latest` = now()
             WHERE `materialId` = :materialId AND `employeeId` = :employeeId;";
 
@@ -79,7 +79,7 @@
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
             
-            $sql = "UPDATE `viewing`
+            $sql = "UPDATE `Viewing`
             SET `completed` = 1
             WHERE `materialId` = :materialId AND `employeeId` = :employeeId;";
 
