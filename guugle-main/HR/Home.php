@@ -29,7 +29,7 @@
                
                 
                 <li class="nav-item">
-                  <a href= "./guugle-main/HR/Home.php"  class="nav-link">HR Portal</a>
+                  <a href= "Home.php"  class="nav-link">HR Portal</a>
                 </li>
                 
                 <li class="nav-item">
@@ -62,13 +62,13 @@
   <input type="text" id="name">
   <a href="./createEngineer.php" class="float-right"><button type='button' class='btn btn-primary mx-2'>Add New Engineer</button></a>
     <table id="engineer-table" class="table table-dark m-2">
-      <tr><th>Employee ID</th><th>Name</th><th>Category</th><th>phone No.</th><th>Date joined</th><th>Address</th></tr>
+      <tr><th>Employee ID</th><th>Name</th><th>Designation</th><th>Department</th><th>username</th><th>phone No.</th><th>Date joined</th><th>Address</th></tr>
       <?php
         $EmpDAO = new EmployeeDAO();
         $employees = $EmpDAO->getAll();
         
         foreach($employees as $employee){
-          echo "<tr><th>".$employee->_employeeId."</td><td>".$employee->_name."</td><td>learner</td><td>".$employee->_phoneNumber."</td><td>".$employee->_dateJoined."</td><td>".$employee->_address."</td>"."<td><button type='button' class='btn btn-danger mx-2' onclick='remove()'>Remove</button><button type='button' class='btn btn-success mx-2' onclick='edit(this)'>Edit</button><button type='button' class='btn btn-primary mx-2' onclick='assign(this)'>Assign</button></td></tr>";
+          echo "<tr><td>".$employee->_employeeId."</td><td>".$employee->_name."</td><td>".$employee->_designation."</td><td>".$employee->_dept."</td><td>".$employee->_username."</td><td>".$employee->_phoneNumber."</td><td>".$employee->_dateJoined."</td><td>".$employee->_address."</td>"."<td><button type='button' class='btn btn-danger mx-2' onclick='remove()'>Remove</button><button type='button' class='btn btn-success mx-2' onclick='edit(this)'>Edit</button><button type='button' class='btn btn-primary mx-2' onclick='assign(this)'>Assign</button></td></tr>";
         }
         
         ?>
@@ -77,7 +77,10 @@
 
     <!-- Section - Hidden From - Assign -->
     <div id="hidden-form-assign">
-      <form action="assignProcess.php"  method="post" class="m-2">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-6">
+          <form action="assignProcess.php"  method="post" class="m-2">
         <div class="form-group">
           <label for="eId">Employee ID</label>
           <input type="text" id="assign-form-eid" name="employeeId" class="form-control" placeholder="Employee ID">
@@ -139,6 +142,30 @@
         <!--button type="button" class="btn btn-primary" id="btn-insert" onclick="insert()">Assign enginner to class</button-->
         
       </form>
+          </div>
+          <div class="col-6">
+              <?php
+                  require_once('./checkPreReq.php');
+                  
+                  $empLists = $EmpDAO->getAll();
+                  $course101 = array();
+                  $course102 = array();
+                  $course103 = array();
+                  
+                  for($x=0; $x< count($empLists); $x++){
+                    $emp_obj = $empLists[$x];
+                    $emp_id = $emp_obj->getId();
+                    $course101[] = array($emp_id => checkPreReq($emp_id, 101));
+                    $course102[] = array($emp_id => checkPreReq($emp_id, 102));
+                    $course103[] = array($emp_id => checkPreReq($emp_id, 103));
+                  }
+                  $courses = array($course101,$course102, $course103);
+                  echo build_table($courses);
+              ?>
+          </div>
+        </div>
+      </div>
+      
       </div>
     <!--End of Assign Form-->
 
@@ -152,13 +179,13 @@
     <input type="text" id="name">
 
     <table id="course-table" class="table table-striped m-2">
-      <tr><th>Course ID</th><th>Course Name</th><th></th></tr>
+      <tr><th>Course ID</th><th>Course Name</th><th>Self-Enrollment Period</th><th></th></tr>
       <?php
          $courseDAO2 = new CourseDAO();
          $courses2 = $courseDAO2->getAll();
        
         foreach($courses2 as $course){
-          echo "<tr><th>".$course->courseId."</td><td>".$course->name."</td><td><button type='button' id='".$course->courseId."'"."class='btn btn-primary' onclick='viewCourse(this)'>View Details</button></td></tr>";
+          echo "<tr><th>".$course->courseId."</td><td>".$course->name."</td><td>".$course->getSelfEnrollPeriod()."</td><td><form action='setSelfEnrolPeriod.php' method='post'><button type='submit' name='selfEnrol' value='".$course->courseId."'"."class='btn btn-success mr-1'>Set Self-enrollment Period</button><button type='button' id='".$course->courseId."'"."class='btn btn-primary' onclick='viewCourse(this)'>View Details</button></form></td></tr>";
         }
         
       ?>
@@ -259,13 +286,13 @@
      
     }
 
+
     </script>
       
      
 
    
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>

@@ -60,6 +60,18 @@
       <input type="text" id="name" name="name" class="form-control">
     </div>
     <div class="form-group">
+      <label for="employeeID">Designation</label>
+      <input type="text" id="designation" name="designation" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="employeeID">Department</label>
+      <input type="text" id="dept" name="dept" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="employeeID">Username</label>
+      <input type="text" id="username" name="username" class="form-control">
+    </div>
+    <div class="form-group">
       <label for="email">Phone Number</label>
       <input type="text" id="phone" name="phone" class="form-control">
     </div>
@@ -73,7 +85,8 @@
       <label for="email">Category</label>
       <select name="category" id="category" class="form-control" name="category">
         <option value="trainer">Trainer/Senior</option>
-        <option value="engineer">Engineer/Junior</option>
+        <option value="learner">Engineer/Junior</option>
+        <option value="HR">HR</option>
       </select>
     </div>
     <div class="form-group">

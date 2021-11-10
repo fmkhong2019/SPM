@@ -1,19 +1,37 @@
 <?php
-
 class ConnectionManager {
 
-    public function connect() {
-        $servername = 'localhost';
-        $username = 'root';
-        $password = ''; 
-        $dbname = 'lms';
-        
-        // Create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);     
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // if fail, exception will be thrown
+  public function connect() {
+    $servername = "spm.cpaxvjaqps8a.ap-southeast-1.rds.amazonaws.com";
+    $portnumber = "3306";
+    $charset = 'utf8';
+    $username = "admin";
+    $password = "ilovespm";  //mamp pls change
+    $dbname = "LMS";
+    
+    return new PDO("mysql:host=$servername;port=$portnumber;dbname=$dbname;charset=$charset", $username, $password);     
+  }
 
-        // Return connection object
-        return $conn;
-    }
+  public function getTestConnection() {
+    $servername = "spm.cpaxvjaqps8a.ap-southeast-1.rds.amazonaws.com";
+    $portnumber = "3306";
+    $charset = 'utf8';
+    $username = "admin";
+    $password = "ilovespm";  //mamp pls change
+    $dbname = "LMS";
+    
+    return new PDO("mysql:host=$servername;port=$portnumber;dbname=$dbname;charset=$charset", $username, $password);     
+  }
 
+  public function getLocalConnection() {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";  //mamp pls change
+    $dbname = "lms";
+    
+    return new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);     
+  }
+  
+ 
 }
+?>

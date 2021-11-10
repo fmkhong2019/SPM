@@ -77,7 +77,7 @@
       <?php
         foreach($enrollments as $enrollment){
           if(!is_null($enrollment)){
-            $eid = $enrollment->getengineerid();
+            $eid = $enrollment->getEmployeeId();
             $emp = $employeeDAO->findById($eid);
             if(!is_null($emp)&&$eid!=$class_obj->trainerId){
               echo "<tr><td>$emp->_employeeId</td><td>$emp->_name</td><td>$emp->_phoneNumber</td><td>$emp->_address</td></tr>";  

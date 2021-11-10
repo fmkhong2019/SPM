@@ -9,14 +9,14 @@ class EnrollmentDAO {
     // Takes $id and returns info 
     #returns null if there is nothing to retrieve
     #Retrieve / get
-    public function getClass($engineerid) {
+    public function getClass($employeeId) {
 
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
-        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId ";
+        $sql = "SELECT * FROM enrollment  where `employeeId` = :employeeId ";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
+        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
         
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -26,8 +26,9 @@ class EnrollmentDAO {
         while( $row = $stmt->fetch() ) {
             $result[] = 
                 new Enrollment(
-                    $row['engineerId'],
+                    $row['employeeId'],
                     $row['classId'],
+                    $row['courseId'],
                     $row['completedDate'],
                     $row['completed'],
                     $row['enrolledDate'],
@@ -43,14 +44,15 @@ class EnrollmentDAO {
 
     }
 
-    public function addEmployee($engineerId, $classId, $completed, $enrolledDate, $completedDate, $progress){
+    public function addEmployee($employeeId, $classId, $courseId, $completed, $enrolledDate, $completedDate, $progress){
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
         
         $sql = "INSERT INTO enrollment
         (
-            engineerId, 
+            employeeId, 
             classId, 
+            courseId,
             completed,
             enrolledDate,
             completedDate, 
@@ -58,8 +60,9 @@ class EnrollmentDAO {
         )
         VALUES
         (
-            :engineerId,
+            :employeeId,
             :classId,
+            :courseId,
             :completed,
             :enrolledDate,
             :completedDate,
@@ -67,8 +70,9 @@ class EnrollmentDAO {
         )";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':engineerId', $engineerId, PDO::PARAM_INT);
+        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
         $stmt->bindParam(':classId', $classId, PDO::PARAM_INT);
+        $stmt->bindParam(':courseId', $courseId, PDO::PARAM_INT);
         $stmt->bindParam(':completed', $completed, PDO::PARAM_INT);
         $stmt->bindParam(':enrolledDate', $enrolledDate, PDO::PARAM_STR);
         $stmt->bindParam(':completedDate', $completedDate, PDO::PARAM_STR);
@@ -83,13 +87,13 @@ class EnrollmentDAO {
         return $status;
     }
 
-    public function getProgress($engineerid, $classid) {
+    public function getProgress($employeeId, $classid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId AND `classId` = :classId ";
+        $sql = "SELECT * FROM enrollment  where `employeeId` = :employeeId AND `classId` = :classId ";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
+        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
         $stmt->bindParam(':classId', $classid, PDO::PARAM_STR);
         
         $stmt->execute();
@@ -100,7 +104,7 @@ class EnrollmentDAO {
         if( $row = $stmt->fetch() ) {
             $result[] = 
                 new Enrollment(
-                    $row['engineerId'],
+                    $row['employeeId'],
                     $row['classId'],
                     $row['completedDate'],
                     $row['completed'],
@@ -124,7 +128,7 @@ class EnrollmentDAO {
         $conn = $connMgr->connect();
 
         // STEP 2
-        $sql = "SELECT COUNT(engineerId) FROM enrollment WHERE classId = :classId";
+        $sql = "SELECT COUNT(employeeId) FROM enrollment WHERE classId = :classId";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':classId', $id, PDO::PARAM_INT);
 
@@ -163,8 +167,9 @@ class EnrollmentDAO {
         while( $row = $stmt->fetch() ) {
             $enrollments[] =
                 new Enrollment(
-                    $row['engineerId'],
+                    $row['employeeId'],
                     $row['classId'],
+                    $row['courseId'],
                     $row['completedDate'],
                     $row['completed'],
                     $row['enrolledDate'],

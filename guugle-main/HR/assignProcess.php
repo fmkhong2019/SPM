@@ -35,7 +35,7 @@
                 if($class_obj->getClassSize()>$enrolDAO->getNumberOfStudents($class_obj->getClassId())){
                     //add engineer into the class
                     $timestamp = date("Y/m/d");
-                    $enrolDAO->addEmployee($employeeId, $int_classId, '0', $timestamp, null, '0');
+                    $enrolDAO->addEmployee($employeeId, $int_classId, $courseId, '0', $timestamp, null, '0');
                     echo "Successfully added Engineer!";
                 }else{
                     echo "Task Failure: Class is fullly occupied!";

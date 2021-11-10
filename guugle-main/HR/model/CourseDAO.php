@@ -72,7 +72,7 @@ class CourseDAO {
         return $course;
     }
 
-    public function update($id, $startDate, $endDate, $trainerId, $classSize, $courseName) {
+    public function updateSelfEnrollPeriod($id, $date) {
 
         // STEP 1
         $connMgr = new ConnectionManager();
@@ -80,22 +80,14 @@ class CourseDAO {
 
         // STEP 2
         $sql = "UPDATE
-                    class
+                    course
                 SET
-                    startDate = :startDate,
-                    endDate = :endDate,
-                    trainerId = :trainerId,
-                    classSize = :classSize
-                    courseName = :courseName
+                    selfEnrollPeriod = :selfEnrollPeriod
                 WHERE 
-                    id = :id";
+                    courseId = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':startDate', $startDate, PDO::PARAM_STR);
-        $stmt->bindParam(':endDate', $endDate, PDO::PARAM_STR);
-        $stmt->bindParam(':trainerId', $trainerId, PDO::PARAM_INT);
-        $stmt->bindParam(':classSize', $classSize, PDO::PARAM_INT);
-        $stmt->bindParam(':courseName', $courseName, PDO::PARAM_STR);
+        $stmt->bindParam(':selfEnrollPeriod', $date, PDO::PARAM_STR);
 
         //STEP 3
         $status = $stmt->execute();

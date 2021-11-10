@@ -3,6 +3,8 @@
 class Course{
     public $courseId;
     public $name;
+    public $courseDesc;
+    public $selfEnrollPeriod;
 
     public function __construct($courseId, $name) {
         $this->courseId = $courseId;
@@ -16,21 +18,26 @@ class Course{
     public function getCourseName() {
         return $this->name;
     }
-}
 
-
-class PreRequisite extends Course{
-    public function __construct($courseId, $name, array $pre_reqs=array()) {
-        $this->courseId = $courseId;
-        $this->name = $name;
-        foreach($pre_reqs as $pre_req){
-            $this->pre_reqs[] = $pre_req;
+    public function getSelfEnrollPeriod(){
+        if($this->selfEnrollPeriod==null){
+            return "Have Not Been Set";
+        }else{
+            return $this->selfEnrollPeriod;
         }
+        
     }
-    public function getPreReqs(){
-        return $this->pre_reqs;
+
+    public function setSelfEnrollPeriod($date){
+        if(empty($date))
+        throw new InvalidArgumentException('Date can not be empty');
+
+    $this->selfEnrollPeriod = $date;
+        
     }
 }
+
+
 
 ?>
 

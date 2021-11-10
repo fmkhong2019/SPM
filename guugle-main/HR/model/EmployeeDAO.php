@@ -11,7 +11,7 @@ require_once 'common.php';
     
             // STEP 2
             $sql = "SELECT
-                        employeeId, name, phoneNumber, dateJoined, address
+                       employeeId, employeeName, designation, dept, username, phoneNumber, dateJoined, address
                     FROM employee"; 
             $stmt = $conn->prepare($sql);
     
@@ -25,7 +25,10 @@ require_once 'common.php';
                 $employees[] =
                     new Employee(
                         $row['employeeId'],
-                        $row['name'],
+                        $row['employeeName'],
+                        $row['designation'],
+                        $row['dept'],
+                        $row['username'],
                         $row['phoneNumber'],
                         $row['dateJoined'],
                         $row['address']
@@ -40,14 +43,17 @@ require_once 'common.php';
             return $employees;
         }
 
-        public function addEmployee($employeeId, $name, $phoneNumber, $dateJoined, $address, $pw){
+        public function addEmployee($employeeId, $name, $designation, $dept, $username, $phoneNumber, $dateJoined, $address, $pw){
             $connMgr = new ConnectionManager();
             $conn = $connMgr->connect();
             
             $sql = "INSERT INTO employee
             (
                 employeeId,
-                name, 
+                employeeName,
+                designation,
+                dept,
+                username, 
                 phoneNumber, 
                 dateJoined, 
                 address,
@@ -57,6 +63,9 @@ require_once 'common.php';
             (   
                 :employeeId,
                 :name,
+                :designation,
+                :dept,
+                :username, 
                 :phoneNumber,
                 :dateJoined,
                 :address,
@@ -66,6 +75,9 @@ require_once 'common.php';
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':designation', $designation, PDO::PARAM_STR);
+            $stmt->bindParam(':dept', $dept, PDO::PARAM_STR);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->bindParam(':phoneNumber', $phoneNumber, PDO::PARAM_INT);
             $stmt->bindParam(':dateJoined', $dateJoined, PDO::PARAM_STR);
             $stmt->bindParam(':address', $address, PDO::PARAM_STR);
@@ -80,23 +92,29 @@ require_once 'common.php';
             return $status;
         }
         
-        public function updateEmployee($id, $name, $phoneNumber, $dateJoined, $address){
+        public function updateEmployee($id, $name, $designation, $dept, $username, $phoneNumber, $dateJoined, $address){
             $connMgr = new ConnectionManager();
             $conn = $connMgr->connect();
    
             $sql = "UPDATE 
                         employee 
                     SET 
-                        name=:name, 
-                        phoneNumber=:phoneNumber, 
-                        dateJoined=:dateJoined, 
-                        address=:address
+                        employeeName = :name, 
+                        designation = :designation,
+                        dept = :dept,
+                        username = :username, 
+                        phoneNumber = :phoneNumber, 
+                        dateJoined = :dateJoined, 
+                        address = :address
                     WHERE 
                         employeeID=:id";
             
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':designation', $designation, PDO::PARAM_STR);
+            $stmt->bindParam(':dept', $dept, PDO::PARAM_STR);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->bindParam(':phoneNumber', $phoneNumber, PDO::PARAM_INT);
             $stmt->bindParam(':dateJoined', $dateJoined, PDO::PARAM_STR);
             $stmt->bindParam(':address', $address, PDO::PARAM_STR);
@@ -136,7 +154,7 @@ require_once 'common.php';
             $conn = $connMgr->connect();
 
             $sql = "SELECT
-                    employeeId, name, phoneNumber, dateJoined, address FROM employee
+                        employeeId, employeeName, designation, dept, username, phoneNumber, dateJoined, address FROM employee
                     WHERE employeeId = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -151,10 +169,14 @@ require_once 'common.php';
                 $employee_object = 
                     new Employee(
                         $row['employeeId'],
-                        $row['name'],
+                        $row['employeeName'],
+                        $row['designation'],
+                        $row['dept'],
+                        $row['username'],
                         $row['phoneNumber'],
                         $row['dateJoined'],
-                        $row['address']);
+                        $row['address']
+                    );
             }
 
             // STEP 5
@@ -169,7 +191,9 @@ require_once 'common.php';
             $connMgr = new ConnectionManager();
             $conn = $connMgr->connect();
 
-            $sql = "SELECT employeeId, name, phoneNumber, dateJoined, address FROM employee WHERE name = :name";
+            $sql = "SELECT 
+                        employeeId, employeeName, designation, dept, username, phoneNumber, dateJoined, address 
+                    FROM employee WHERE name = :name";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmt->execute();
@@ -180,10 +204,14 @@ require_once 'common.php';
                 $employee_object = 
                     new Employee(
                         $row['employeeId'],
-                        $row['name'],
+                        $row['employeeName'],
+                        $row['designation'],
+                        $row['dept'],
+                        $row['username'],
                         $row['phoneNumber'],
                         $row['dateJoined'],
-                        $row['address']);
+                        $row['address']
+                    );
             }
 
             // STEP 5
