@@ -56,7 +56,8 @@ class EnrollmentController{
                         $finalresult["classes"][] = array(
                         "classId" =>$c->getclassid(),
                         "courseName" => $cname,
-                        "enrolledDate" => $c->getenrolleddate());
+                        "enrolledDate" => $c->getenrolleddate(),
+                        "completed" => $c->getcompleted());
                     //}
                 }
                 
@@ -66,7 +67,12 @@ class EnrollmentController{
         return $finalresult;
     }
 
-    
+
+    function updateCompletion($employeeId, $classId) {
+        $dao = new EnrollmentDAO();
+        $result = $dao->setCompleted($employeeId, $classId);
+        return $result;
+    }    
 }
 
 // $enrollment = new EnrollmentController;

@@ -1,4 +1,6 @@
-<html lang="en">
+<?php
+session_start();
+?>
     <head>
         <title>Quiz Attempt</title><meta name="viewport" content="width=device-width"/>
         <script src="https://unpkg.com/knockout@3.5.1/build/output/knockout-latest.js"></script>
@@ -19,10 +21,10 @@
             // }
             console.log('hello');
 
-            // var classId = <?php echo($_SESSION['classId'])?>;
-            var classId = <?php echo(1)?>;
+            var classId = <?php echo($_GET['classId'])?>;
+            // var classId =
             var sectionId = -1;
-            var employeeId = 4;
+            var employeeId = <?php echo($_SESSION['employeeId']) ?>;
 
             const request = new XMLHttpRequest();
         
@@ -38,7 +40,7 @@
                     console.log(questions);
                     console.log(timeLimit);
                     var timeInSeconds = timeLimit*60
-                    var quizName = courseName + ' Section ' + sectionId;
+                    var quizName = courseName + ' Graded Quiz';
 
                     var json = {
                     title: `${quizName}`,
@@ -56,43 +58,50 @@
                             }
                         ]
                     }],
-                    completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"
+                    completedHtml: "<h4>You have answered correctly <b id='correct'>{correctedAnswers}</b> questions from <b id='all'>{questionCount}</b>.</h4>"
                 };
 
                 
-                    for (question of questions){
+                for (question of questions){
                         var questionId= question["questionId"];
-                        var question= question["question"];
+                        var questionStmt= question["question"];
                         var correctAnswer= question["correctAnswer"];
-                        // var ans1 = question["ans1"];
-                        // var ans2 = question["ans2"];
-                        // var ans3 = question["ans3"];
-                        // var ans4 = question["ans4"];
+                        console.log(question);
+                        console.log(question["type"])
 
-                        var ans1 = "this is correct";
-                        var ans2 = "this is correct";
-                        var ans3 = "this is correct";
-                        var ans4 = "this is correct";
-
-                        console.log(questionId);
-                        console.log(sectionId);
-                        console.log("correctAnswer");
-                    
-
-                        json.pages.push({
+                        if (question['type'] == 'MCQ') {
+                            var ans1 = question["ans1"];
+                            var ans2 = question["ans2"];
+                            var ans3 = question["ans3"];
+                            var ans4 = question["ans4"];
+                            json.pages.push({
                             
                             questions: [
                                 {
                                     type: "radiogroup",
                                     name: questionId,
-                                    title: question,
+                                    title: questionStmt,
                                     choicesOrder: "random",
                                     choices: [ans1, ans2, ans3, ans4],
                                     correctAnswer: correctAnswer
                                 }
                             ]});
-                    // json.pages.push(page);
-                // console.log(pages);
+                        }
+
+                        else {
+                            json.pages.push({
+                            
+                            questions: [
+                                {
+                                    type: "radiogroup",
+                                    name: questionId,
+                                    title: questionStmt,
+                                    choicesOrder: "random",
+                                    choices: ['True', "False"],
+                                    correctAnswer: correctAnswer
+                                }
+                            ]});
+                        }
                 }
                 Survey
                     .StylesManager
@@ -106,9 +115,23 @@
                             .querySelector('#surveyResult')
                             .textContent = "Result JSON:\n" + JSON.stringify(sender.data);
                         console.log(sender);
-                        gradeMyQuiz();
+                        var correct = document.getElementById('correct').innerText;
+                        var all = document.getElementById('all').innerText;
+                        var grade = (correct / all);
+                        console.log(grade)
+                        if(grade>=0.85) {
+                            var pass = true;
+                        }
+
+                        else {
+                            var pass = false;
+                        }
+
+                        
+
+                        // gradedQuizHandling(classId, employeeId, pass);
                         // Yet to decide where to return them to
-                        document.querySelector('#returnToSection').innerHTML = `<a href="" class="btn btn-primary">Go back to All Courses</a>`
+                        document.querySelector('#returnToSection').innerHTML = `<a href=` + `"./server/helper/updateClassCompletion?pass=${pass}&classId=${classId}" class="btn btn-primary">Go back to All Courses</a>`
                     });
 
                 survey.render("surveyElement");

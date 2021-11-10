@@ -111,7 +111,7 @@ session_start();
                     
                     <td>Final Quiz</td>
                     <td>Get above the passing mark to attain a badge</td>
-                    <td><a href="ungradedQuiz.php?classId=${classId}&sectionId=${-1}" class="btn btn-primary">Bring me to Quiz</a></td>
+                    <td><a href="gradedQuiz.php?classId=${classId}" class="btn btn-primary">Bring me to Quiz</a></td>
                     </tr>
                     </form>`
                 }

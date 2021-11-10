@@ -8,7 +8,7 @@ class AttemptDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "INSERT INTO `attempt` (`classId`, `sectionId`, `employeeId`,`score`) VALUES (:classId, :sectionId, :employeeId, :score)";
+        $sql = "INSERT INTO `Attempt` (`classId`, `sectionId`, `employeeId`,`score`) VALUES (:classId, :sectionId, :employeeId, :score)";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
@@ -22,42 +22,42 @@ class AttemptDAO {
         return $isOk;
     }
 
-    public function getAttempt($classId, $sectionId, $employeeId) {
-        $conn = new ConnectionManager();
-        $pdo = $conn->getConnection();
+    // public function getAttempt($classId, $sectionId, $employeeId) {
+    //     $conn = new ConnectionManager();
+    //     $pdo = $conn->getConnection();
 
-        $sql = "SELECT * FROM `attempt` WHERE `sectionId`= :sectionId AND `classId` = :classId AND `employeeId` = :employeeId";
+    //     $sql = "SELECT * FROM `attempt` WHERE `sectionId`= :sectionId AND `classId` = :classId AND `employeeId` = :employeeId";
 
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
-        $stmt->bindParam(':classId', $classId, PDO::PARAM_INT);
-        $stmt->bindParam(':sectionId', $sectionId, PDO::PARAM_INT);
+    //     $stmt = $pdo->prepare($sql);
+    //     $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
+    //     $stmt->bindParam(':classId', $classId, PDO::PARAM_INT);
+    //     $stmt->bindParam(':sectionId', $sectionId, PDO::PARAM_INT);
 
-        $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    //     $stmt->execute();
+    //     $stmt->setFetchMode(PDO::FETCH_ASSOC);
         
-        $result = null;
-        // $post_object = null;
-        if( $row = $stmt->fetch() ) {
-            $result = 
-                new Attempt(
-                    $row['attemptId'],
-                    $row['classId'],
-                    $row['sectionId'],
-                    $row['employeeId'],
-                    $row['score']
-                );
+    //     $result = null;
+    //     // $post_object = null;
+    //     if( $row = $stmt->fetch() ) {
+    //         $result = 
+    //             new Attempt(
+    //                 $row['attemptId'],
+    //                 $row['classId'],
+    //                 $row['sectionId'],
+    //                 $row['employeeId'],
+    //                 $row['score']
+    //             );
         
-        }
+    //     }
 
-        else {
-            return False;
-        }
-        $stmt = null;
-        $pdo = null;
+    //     else {
+    //         return False;
+    //     }
+    //     $stmt = null;
+    //     $pdo = null;
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
 }
 

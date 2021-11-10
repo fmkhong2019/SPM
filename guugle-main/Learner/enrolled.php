@@ -56,6 +56,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Course Name</th>
                                 <th scope="col">Enrolled Date</th>
+                                <th scope="col">Completed?</th>
                                 <th scope="col">Take me to the course</th>
                             </tr>
                         </thead>
@@ -116,6 +117,17 @@
                         var engineerid = classes["engineerId"]
                         var coursename = classes["courseName"]
                         var enrolleddate = classes["enrolledDate"]
+                        var completed = classes["completed"]
+
+                        console.log(c);
+
+                        if(completed ==1 ){
+                            var display = 'Not completed'
+                        }
+
+                        else {
+                            var display = "Completed"
+                        }
    
                         // var completed = classes["completed"]
                         // var enrolledDate = classes["enrolledDate"]
@@ -127,6 +139,8 @@
                                 <th scope="row">${count}</th>
                                 <td>${coursename}</td>
                                 <td>${enrolleddate}</td>
+                                <td>${display}</td>
+
                                 
 
                                 <td>

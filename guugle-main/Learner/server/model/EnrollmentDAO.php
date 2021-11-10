@@ -104,6 +104,20 @@ class EnrollmentDAO {
         $result = $stmt->execute();
         return $result;
     }
+
+    public function setCompleted ($employeeId, $classid) {
+        $conn = new ConnectionManager();
+        $pdo = $conn->getConnection();
+        $sql = "UPDATE Enrollment
+            SET completed = 1
+            WHERE `employeeId` = :employeeId AND `classId` = :classId";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
+        $stmt->bindParam(':classId', $classid, PDO::PARAM_STR);
+
+        $result = $stmt->execute();
+        return $result;
+    }
 // ALL BELOW ARE FROM PAST PROJECT , USE AS REFERENCE
 //     public function checkUser($id) {
 
