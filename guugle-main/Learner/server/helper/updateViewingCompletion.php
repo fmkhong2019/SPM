@@ -1,15 +1,15 @@
 <?php
-    session_start();
-    require_once "common.php";
-    $dao = new ViewingDAO();
+    // session_start();
+    require_once "./common.php";
+    $viewingController= new ViewingController();
 
     $materialId = $_GET['materialId'];
-    $engineerId = $_GET['engineerId'];
-
+    $employeeId = $_GET['employeeId'];
     // $materialId = 2;
     // $engineerId = 4;
-    
-    $update = $dao->updateComplete($materialId, $engineerId);
 
-    header("Location: ../../materials.php?" );
+    $update = $viewingController->updateViewingCompletion($materialId, $employeeId);
+
+
+    header("Location: ../../materials.php" );
 ?>

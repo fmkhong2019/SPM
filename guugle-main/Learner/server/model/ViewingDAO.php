@@ -1,14 +1,14 @@
 <?php
 
     class ViewingDAO {
-        public function createViewing($materialId, $engineerId){
+        public function createViewing($materialId, $employeeId){
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
 
-            $sql = "INSERT INTO `viewing` (`engineerId`, `materialId`, `completed`, `latest`) VALUES (:engineerId, :materialId, 0, now())";
+            $sql = "INSERT INTO `Viewing` (`employeeId`, `materialId`, `completed`, `latest`) VALUES (:employeeId, :materialId, 0, now())";
 
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':engineerId', $engineerId, PDO::PARAM_INT);
+            $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
             $stmt->bindParam(':materialId', $materialId, PDO::PARAM_INT);
 
             $isOk = $stmt->execute();
@@ -17,15 +17,15 @@
             return $isOk;
         }
 
-        public function getViewing($materialId, $engineerId) {
+        public function getViewing($materialId, $employeeId) {
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
     
-            $sql = "SELECT * FROM `viewing` WHERE `materialId` = :materialId AND `engineerId` = :engineerId";
+            $sql = "SELECT * FROM `Viewing` WHERE `materialId` = :materialId AND `employeeId` = :employeeId";
     
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':materialId', $materialId, PDO::PARAM_INT);
-            $stmt->bindParam(':engineerId', $engineerId, PDO::PARAM_INT);
+            $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
 
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -35,7 +35,7 @@
             if( $row = $stmt->fetch() ) {
                 $result = 
                     new Viewing(
-                        $row['engineerId'],
+                        $row['employeeId'],
                         $row['materialId'],
                         $row['completed'],
                         $row['latest']
@@ -52,18 +52,18 @@
             return $result;
         }
 
-        public function updateLatest($materialId, $engineerId) {
+        public function updateLatest($materialId, $employeeId) {
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
             
-            $sql = "UPDATE `viewing`
+            $sql = "UPDATE `Viewing`
             SET `latest` = now()
-            WHERE `materialId` = :materialId AND `engineerId` = :engineerId;";
+            WHERE `materialId` = :materialId AND `employeeId` = :employeeId;";
 
             $stmt = $pdo->prepare($sql);
             // $stmt->bindParam(':class', $classId, PDO::PARAM_INT);
             $stmt->bindParam(':materialId', $materialId, PDO::PARAM_INT);
-            $stmt->bindParam(':engineerId', $engineerId, PDO::PARAM_INT);
+            $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
             
 
             $isOk = $stmt->execute();
@@ -75,18 +75,18 @@
             return $isOk;
         }
 
-        public function updateComplete($materialId, $engineerId) {
+        public function updateComplete($materialId, $employeeId) {
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
             
-            $sql = "UPDATE `viewing`
+            $sql = "UPDATE `Viewing`
             SET `completed` = 1
-            WHERE `materialId` = :materialId AND `engineerId` = :engineerId;";
+            WHERE `materialId` = :materialId AND `employeeId` = :employeeId;";
 
             $stmt = $pdo->prepare($sql);
             // $stmt->bindParam(':class', $classId, PDO::PARAM_INT);
             $stmt->bindParam(':materialId', $materialId, PDO::PARAM_INT);
-            $stmt->bindParam(':engineerId', $engineerId, PDO::PARAM_INT);
+            $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
 
             $isOk = $stmt->execute();
             $stmt = null;

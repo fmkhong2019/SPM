@@ -1,7 +1,7 @@
 <script type='text/javascript'>
     const sectionId = `<?php echo(1)?>`;
     const classId = `<?php echo(1)?>`;
-    const engineerId = `<?php echo(4)?>`;
+    const employeeId = `<?php echo(1)?>`;
 </script>
 
 <!DOCTYPE html>
@@ -98,13 +98,14 @@
                                 <th scope="row">${name}</th>
                                 <td>${filePath}</td>
                                 <td>
-                                    <a href="./server/helper/getS3.php?keyPath=${filePath}&engineerId=${engineerId}&materialId=${materialId}" class="btn btn-primary">Click to View</a>
+                                    <a href="./server/helper/getS3.php?keyPath=${filePath}&employeeId=${employeeId}&materialId=${materialId}" class="btn btn-primary">Click to View</a>
                                 </td>`;
 
                         if(completed == 0) {
+                            console.log('uncomplete')
                             quizAccess = false;
                             value += ` <td>
-                                    <a href="./server/helper/updateViewingCompletion.php?engineerId=${engineerId}&materialId=${materialId}" class="btn btn-primary">Incomplete</a>
+                                    <a href="./server/helper/updateViewingCompletion.php?employeeId=${employeeId}&materialId=${materialId}" class="btn btn-primary">Incomplete</a>
                                 </td>
                             </tr>`;
                         }
@@ -123,7 +124,7 @@
                                 <th scope="row">Quiz</th>
                                 <td>Test</td>
                                 <td>
-                                    <a href="test.com" class="btn btn-primary">Bring me to Quiz</a>
+                                    <a href="ungradedQuiz.php?classId=${classId}&sectionId=${sectionId}" class="btn btn-primary">Bring me to Quiz</a>
                                 </td>
                                 <td>Test</td>`;
                     }

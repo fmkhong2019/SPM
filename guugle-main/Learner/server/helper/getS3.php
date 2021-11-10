@@ -1,38 +1,25 @@
 <?php
-    require_once "common.php";
-    $dao = new ViewingDAO();
-
-   // AWS Info
-    $bucketName = 'spmlmsmaterials';
-    $IAM_KEY = 'AKIAR3OUAEMXP2SOFBKT';
-    $IAM_SECRET = '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';
-
+    require_once "./common.php";
     require '../../vendor/autoload.php';
-
     use Aws\S3\S3Client;
     use Aws\S3\Exception\S3Exception;
 
+    $materialView = new MaterialView();
+
+   // AWS Info
+
+
+    //Obtained
     $keyPath = $_GET['keyPath'];
-    // var_dump($keyPath);
-
     $materialId = $_GET['materialId'];
-    $engineerId = $_GET['engineerId'];
-
-    var_dump(($_GET));
-
-    $result = $dao-> createViewing($materialId, $engineerId);
-    var_dump($result);
+    $employeeId = $_GET['employeeId'];
 
 
-    if(!$result) {
-        $result = $dao-> updateLatest($materialId, $engineerId);
-        echo('hello there');
-    }
-    
-    
+
+
+    $result = $materialView->getS3($materialId, $employeeId);
 
     
-
     // Get file
     try {
     // $s3 = S3Client::factory(

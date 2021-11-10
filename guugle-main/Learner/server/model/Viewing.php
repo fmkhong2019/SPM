@@ -1,20 +1,20 @@
 <?php
 
 class Viewing {
-    public $engineerId;
+    public $employeeId;
     public $materialId;
     public $completed;
     public $latest;
     
-    public function __construct($engineerId, $materialId, $completed, $latest) {
-        $this->engineerId =$engineerId;
+    public function __construct($employeeId, $materialId, $completed, $latest) {
+        $this->employeeId =$employeeId;
         $this->materialId = $materialId;
         $this->completed = $completed;
         $this->latest = $latest;
         }
 
-    public function getEngineerId() {
-        return $this->engineerId;
+    public function getEmployeeId() {
+        return $this->employeeId;
     }
 
     public function getMaterialId() {

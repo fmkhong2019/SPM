@@ -3,7 +3,6 @@
 class enrollment {
     private $engineerId;
     private $classId;
-    private $courseId;
     private $completedDate;
     private $completed;
     private $enrolledDate;
@@ -11,10 +10,9 @@ class enrollment {
 
 
 
-    public function __construct($engineerId, $classId, $courseId, $completedDate, $completed, $enrolledDate,$progress) {
+    public function __construct($engineerId, $classId, $completedDate, $completed, $enrolledDate,$progress) {
         $this->engineerId = $engineerId;
         $this->classId = $classId;
-        $this->courseId = $courseId;
         $this->completedDate = $completedDate;
         $this->completed = $completed;
         $this->enrolledDate = $enrolledDate;
@@ -28,10 +26,6 @@ class enrollment {
 
     public function getclassid() {
         return $this->classId;
-    }
-
-    public function getcourseid() {
-        return $this->courseId;
     }
 
     public function getcompleteddate() {

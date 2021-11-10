@@ -8,9 +8,6 @@ session_start();
 #}
 ?>
 <script type='text/javascript'>
-
-// const classId = '<?php echo $_GET["classId"]?>';
-const classId = '<?php echo(1)?>';
 </script>
 
 
@@ -76,6 +73,7 @@ const classId = '<?php echo(1)?>';
 
 
     <script>
+        const classId = '<?php echo(1)?>';
         console.log("nihao")
         function getSection(){
             console.log("hello");
@@ -83,7 +81,8 @@ const classId = '<?php echo(1)?>';
             request.onreadystatechange = function(){
             if (this.readyState ==   4 && this.status==200){
                 console.log(this.responseText)
-                let data = JSON.parse(this.responseText).section;
+                let data = JSON.parse(this.responseText).allSections.section;
+                let gradedQuizAccess = JSON.parse(this.responseText).gradedQuizAccess;
                 console.log(data)
                 s = data
                 
@@ -101,11 +100,22 @@ const classId = '<?php echo(1)?>';
                     
                     <td>${sname}</td>
                     <td>${description}</td>
-                    <td><input type = "button" value = "View all materials" id = $sectionid = onclick="myFunction(${sectionid})"></button></td>
+                    <td><input type = "button" value = "View all materials" id = $sectionid = onclick="myFunction(${sectionid}, ${classId})"></button></td>
                     </tr>
                     </form>`
                                         
                 }
+                if(gradedQuizAccess) {
+                    search_results.innerHTML += `
+                    <tr><td>${classid}</td>
+                    
+                    <td>Final Quiz</td>
+                    <td>Get above the passing mark to attain a badge</td>
+                    <td><a href="ungradedQuiz.php?classId=${classId}&sectionId=${-1}" class="btn btn-primary">Bring me to Quiz</a></td>
+                    </tr>
+                    </form>`
+                }
+
             search_results.innerHTML += `</table>`
             }
             }
@@ -114,14 +124,14 @@ const classId = '<?php echo(1)?>';
             request.open("GET", `./server/helper/getSection.php?classId=${classId}`, true);
             request.send();
         }
-        function myFunction(section) {
+        function myFunction(section,classId) {
                         var sid = section
                         //const xmlHttp = new XMLHttpRequest();
                         //xmlHttp.open("GET", `./materials.php?sectionId=${sid}`,true);
                         //xmlHttp.send();
                         //console.log(sid)    
 
-                        window.location.href = "./materials.php?sectionId=" + sid;
+                        window.location.href = "./materials.php?sectionId=" + sid + "&classId=" + classId;
             }
 
     getSection();
