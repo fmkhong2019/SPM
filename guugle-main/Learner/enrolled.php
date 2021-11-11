@@ -1,6 +1,9 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style/style2.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
@@ -46,10 +49,11 @@
 
     <script>
         console.log("nihao")
-        function getClass(){
+
+        function getClass() {
             console.log("hello");
             const request = new XMLHttpRequest();
-            
+
             value = `<table class="table table-hover">
                         <thead>
                             <tr>
@@ -61,16 +65,16 @@
                             </tr>
                         </thead>
                         <tbody>`;
-            request.onreadystatechange = function(){
-                if (this.readyState ==   4 && this.status==200){
-                   // console.log(this.responseText);
+            request.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
                     let data = JSON.parse(this.responseText).classes;
                     //console.log(data1);
                     c = data;
                     // d = data1;
                     // e = data2;
                     // console.log(c)
-                     count = 0;
+                    count = 0;
                     // abc = [] // contains all classId the engineer take
                     // def = [] // contains all courseId of the classId
                     // zxc = []
@@ -105,13 +109,13 @@
                     // for (courses of e) {
                     //     course_dict[courses["courseId"]] = courses["courseName"]
                     // }
-                    
+
                     // // for (classesDetails of d){
                     // //     class_dict[classesDetails[]]
                     // // } 
                     // console.log(course_dict)
                     //console.log(course_dict.length)
-                    for (classes of c){
+                    for (classes of c) {
                         count += 1;
                         var classid = classes["classId"]
                         var engineerid = classes["engineerId"]
@@ -147,7 +151,7 @@
                                 <input type = "button" value = "View all materials" id = $sectionid = onclick="RedirectFunction(${classid})"></button>
                                 </td>
                             </tr>`;
-                        
+
                     }
                     value += `</tbody>
                             </table>`;
@@ -157,18 +161,19 @@
             request.open("GET", "./server/helper/getEnrollment.php", true);
             request.send();
         }
+
         function RedirectFunction(classid) {
-                        var cid = classid
-                        //const xmlHttp = new XMLHttpRequest();
-                        //xmlHttp.open("GET", `./materials.php?sectionId=${sid}`,true);
-                        //xmlHttp.send();
-                        //console.log(sid)    
+            var cid = classid
+            //const xmlHttp = new XMLHttpRequest();
+            //xmlHttp.open("GET", `./materials.php?sectionId=${sid}`,true);
+            //xmlHttp.send();
+            //console.log(sid)    
 
-                        window.location.href = "./sections.php?classId=" + cid;
-            }
+            window.location.href = "./sections.php?classId=" + cid;
+        }
 
-    getClass();
-
-        </script>
+        getClass();
+    </script>
 </body>
+
 </html>

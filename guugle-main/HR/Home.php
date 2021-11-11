@@ -1,5 +1,9 @@
 <?php
     include 'common.php';
+    session_start();
+    if($_SESSION['Role'] != 'HR'){
+      header("location: ../../index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

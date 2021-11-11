@@ -1,16 +1,17 @@
-<?php 
-    require_once "./common.php";
+<?php
+    require_once "common.php";
     $quizController = new QuizController();
 
-    $sectionId = $GET['sectionId'];
-    $classId = $GET['classId'];
 
-    $result = $quizController->getQuiz($sectionId,$classId);
-    echo json_encode($result);
 
-    $status = True;
+ 
+
+
+    $status = False;
 
     if(isset($_POST['Question'])){
+        $sectionId = $_POST['sectionId'];
+        $classId = $_POST['classId'];
         if(isset($_POST['Option1'])) {
     
             $option1=$_POST['Option1'];
@@ -24,18 +25,30 @@
             $option2=null;
             $option3=null;
             $option4=null;
-        }
+        
+    }
         $classId=$_POST['classId'];
-        $section=$_POST['section'];
+        $sectionId=$_POST['sectionId'];
         $answer=$_POST['Ans'];
         $duration=$_POST['time'];
         $type=$_POST['type'];
         $question=$_POST['Question'];
 
-        $quizController->addQuiz($section, $classId,$question, $type, $option1, $option2, $option3, $option4,$answer,$duration);
+        $status = $quizController->addQuiz($sectionId, $classId,$question, $type, $option1, $option2, $option3, $option4,$answer,$duration);
+
     }
 
+    else {
+        $sectionId = $_GET['sectionId'];
+        $classId = $_GET['classId'];
+    }
+
+
+
+    $result = $quizController->getQuiz($sectionId,$classId);
+    echo json_encode($result);
+
     if($status){
-        header("Location: ../../Trainer/Createquiz.php");
+        header("Location: ../../Createquiz.php?sectionId=" . strval($sectionId) . "&" . "classId=" . strval($classId));
     }
 ?>

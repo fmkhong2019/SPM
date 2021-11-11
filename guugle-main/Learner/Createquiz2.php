@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
 <?php
 session_start();
-//$courseId=$_GET["id"];
-//$employeeId = $_SESSION["id"];
-if($_SESSION['Role'] != 'Trainer'){
-  header("location: ../../index.php");
-}
+$section=1;
+$classId=1;
 
+$_SESSION['quizsec']=$section;
+$_SESSION['quizclass']=$classId;
 
-//$_SESSION['courseId']=$courseId;
 ?>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" shrink-to-fit="no">
@@ -24,41 +22,16 @@ if($_SESSION['Role'] != 'Trainer'){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>User</title>
     <link rel="stylesheet" href="style.css">
-   
-</head>
-<style>
-   
-    .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
+   <style>
+   .header {
+  padding: 20px;
   text-align: center;
-}
-
-.title {
-  color: grey;
-  font-size: 18px;
-}
-
-#enroll {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
+  background: #1abc9c;
   color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
+  font-size: 25px;
 }
-
-
-
-button:hover, a:hover {
-  opacity: 0.7;
-}
-</style>
+   </style>
+</head>
 <body>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
         <a href="index.html" class="navbar-brand"><img src="" style="width: 100px; height: auto;">LMS</a>
@@ -102,48 +75,95 @@ button:hover, a:hover {
             </ul>
         </div>
     </nav>
+    <div class='container' style='margin-top:10%;'>
+    <div class='row'>
+    <div class='col-md-6'>
+    <form method='post' action='../CoursesComponent/server/helper/getQuiz.php'>
+    <div class='form-group'>
+    <div class="form-row mb-2">
+    <div class="col">
+    Section  <input type="text" class="form-control" value=<?php echo $section; ?> name='section'  placeholder="Enter Section" readonly>
+    </div>
+    <div class="col">
+     Class ID <input type="text" class="form-control" value=<?php echo $classId; ?>  name='classId'  placeholder="Enter Class Id" readonly>
+    </div>
+  </div>
+    <div class="header">
+  <h1> Quiz- SPM</h1>
 
-<div class="container">
-<h2 style="margin-top:12%;">Available Courses</h2>
-<hr>
-    <div class="row" style="margin-top:10%;margin-left:10%;" id='main' >
+</div>
+
+
+<label for="Name" class="form-label"><b>Question</b></label>
+            <div class="input-group">
+                <input type="text" id="Question" name="Question" class="form-control" required>
+            </div>
+    </div>
+    <label for="" class="form-label"><b>Type</b></label>
+    <div class="form-check">
+  <input class="form-check-input" type="radio" name="type" onclick='change()' id="mcq" value="MCQ">
+  <label class="form-check-label" for="exampleRadios2">
+    MCQ
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="type" onclick='change2()' id="true" value="True">
+  <label class="form-check-label" for="exampleRadios2">
+   True/False
+  </label>
+</div>
+<div class='form-group' id='answers'>
+</div>
+<div class='form-group'>
+
+<label for="Ans" class="form-label"><b>Correct Answer</b></label>
+            <div class="input-group">
+                <input type="text" id="Answer" name="Ans" class="form-control" required>
+            </div>
+    </div>
+<div class='form-group'>
+<label for="time" class="form-label"><b> Question Duration</b></label>
+<input type="range" class='form-control' value='0' id="time" name="time"  oninput="this.nextElementSibling.value = this.value"
+         min="0" max="120">
+         <output>0</output>
+  <label for="volume" class='form-label'>Minutes</label>
+</div>
+<div class='form-group'>
+    <input type="submit"  id="submit" name="submit" class="form-control btn btn-success" >
+    </div>
+    </form>
+    </div>
+ 
+  
+    <div class='col-md-6'>
+    <div class="header">
+  <h2> Quiz Overview</h2    >
 
 
 </div>
-</div>
-</div>
+<ol id='list'>
 
-       
-     
-                
+</ol>
+    </div>
+
+    </div>
+
+    </div>
 </body>
+
+</html>
 <script>
-    var url = "../Learner/server/helper/getCourse.php";
+ let url = "../CoursesComponent/server/helper/getQuiz.php";
 var request = new XMLHttpRequest();
 request.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
- 
-        var result = JSON.parse(this.responseText);
-        var prereqid = 0;
-       
-        for (var node of result.course){
-            if (node.prereqid != undefined){
-              prereqid = node.prereqid; 
-            }
-            else{
-              prereqid = 0;
-            }
-            document.getElementById("main").innerHTML+=  `
-            <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">${node.coursename} </h5></h5>
-        <p class="card-text " >Course Code: ${node.courseid} <br>
-      <i> ${node.coursedesc}</i> <br><b>Pre Requisites:</b> ${node.prereq}</p>
-        <a href="./View_Classes.php?id=${node.courseid}&prereqid=${prereqid}" class="btn btn-primary">View Classes</a>
-      </div>
-    </div>
 
+console.log(this.responseText);
+        var data = JSON.parse(this.responseText);
+      
+        for (var node of data.quiz){
+            document.getElementById("list").innerHTML+=  `
+            <li><b>Question:</b>&nbsp;${node.question}&nbsp;<b>Type:</b> &nbsp;${node.type}&nbsp;<b>Answer:</b>&nbsp;${node.correctAnswer}</li>
 `;
         }
     }
@@ -151,6 +171,30 @@ request.onreadystatechange = function() {
 request.open('GET', url, true);
 request.send();
 
-      
-</script>
-</html>
+function change(){
+
+          
+            document.getElementById('answers').innerHTML=`
+            <div class="input-group">
+                <input type="text" id="Option1"  name="Option1"  placeholder='Option 1' class="form-control" >
+            </div>
+            <div class="input-group">
+                <input type="text" id="Option2"  name="Option2"  placeholder='Option 2' class="form-control" >
+            </div>
+            <div class="input-group">
+                <input type="text" id="Option3"  name="Option3"  placeholder='Option 3' class="form-control" >
+            </div>
+            <div class="input-group">
+                <input type="text" id="Option4"  name="Option4"  placeholder='Option 4' class="form-control" >
+            </div>
+            `;
+       
+        
+    }
+
+    function change2(){
+        document.getElementById('answers').innerHTML='';
+    }
+
+ 
+</script

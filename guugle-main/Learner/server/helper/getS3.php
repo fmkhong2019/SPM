@@ -1,6 +1,16 @@
 <?php
-    require_once "./common.php";
+    require_once "common.php";
+    $dao = new ViewingDAO();
+
+   // AWS Info
+
+
     require '../../vendor/autoload.php';
+
+   $bucketName = 'spmlmsmaterials';
+   $IAM_KEY = 'AKIAR3OUAEMXMLICWQ7R';
+   $IAM_SECRET = '';
+
     use Aws\S3\S3Client;
     use Aws\S3\Exception\S3Exception;
 

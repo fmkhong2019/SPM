@@ -52,6 +52,23 @@
 
             return $response;
         }
+
+
+        function getAllSection($classId){
+            $dao = new SectionDAO();
+            $section = $dao->getSection($classId);
+
+            foreach ($section as $s) {
+                $result1["section"][] = array(
+                    "classId" => $s->getclassid(),
+                    "sectionId" => $s->getsectionid(),
+                    "name" => $s->getname(),
+                    "description" => $s->getdescription()
+                );
+            }
+
+            return $result1;
+        }
     }
 
     // $section = new SectionController();
