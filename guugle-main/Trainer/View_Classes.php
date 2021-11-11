@@ -213,6 +213,7 @@ button:hover, a:hover {
             var complete = document.getElementById("completed").value;
             var enrolled = document.getElementById("enrolled").value;
             console.log(complete);
+            console.log(enrolled);
             if (complete == "false" || enrolled == "false"){
                   var btns = document.getElementsByClassName("btn");
                   document.getElementById("prereq").innerHTML +=  `Pre-requisite modules not completed for enrollment OR Module has already been completed/in progress`;
