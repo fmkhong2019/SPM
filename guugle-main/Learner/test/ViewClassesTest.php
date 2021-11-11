@@ -16,7 +16,7 @@
                 "classid" => '1',
                 "startdate" => '2021-10-06 12:00:00',
                 "enddate"=> '2021-10-13 15:00:00',
-                "trainerid"=> '3',
+                "trainerid"=> '2',
                 "classsize"=> '5'
             );
 

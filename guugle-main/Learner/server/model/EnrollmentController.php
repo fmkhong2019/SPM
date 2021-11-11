@@ -7,6 +7,22 @@ include 'ClassDAO.php';
 include 'CourseDAO.php';
 class EnrollmentController{
 
+    function getCompletion($engineerid, $courseid){
+    
+        $dao = new EnrollmentDAO();
+        if($courseid != 0){
+            $classArray=$dao->getCompletion($engineerid, $courseid);
+            $result = array("status" => array() );
+            foreach ($classArray as $class) {
+                $result["status"][] = array(
+                    "completed" => $class->getcompleted()
+                );
+            }
+        }
+        return $result;
+    }
+     
+
     function getEnrollment($employeeId) {
         $dao = new EnrollmentDAO();
         $dao1 = new ClassDAO();

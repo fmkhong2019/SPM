@@ -45,7 +45,7 @@ class EnrollmentDAO {
     public function getCompletion($engineerid, $courseid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId AND `courseId` = :courseId ";
+        $sql = "SELECT * FROM enrollment  where `employeeId` = :engineerId AND `courseId` = :courseId ";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
@@ -59,7 +59,7 @@ class EnrollmentDAO {
         if( $row = $stmt->fetch() ) {
             $result[] = 
                 new Enrollment(
-                    $row['engineerId'],
+                    $row['employeeId'],
                     $row['classId'],
                     $row['courseId'],
                     $row['completed'],

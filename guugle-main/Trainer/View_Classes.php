@@ -7,7 +7,7 @@ $prereqId = $_GET["prereqid"];
 $employeeId = 1;
 $_SESSION['employeeid'] = $employeeId;
 $_SESSION['prereqid'] = $prereqId;
-$_SESSION['courseId']=$courseId;
+$_SESSION['courseId'] = $courseId;
 ?>
 <html lang="en">
 <head>
@@ -173,9 +173,10 @@ button:hover, a:hover {
         if (this.readyState == 4 && this.status == 200) {
             console.warn(this.responseText)
             var result = JSON.parse(this.responseText);
+            console.log(result.status);
         
           if(result.status.length > 0){
-            console.log(result.status);
+            
             document.getElementById("enrolled").value = "false";
           }
           else{
