@@ -10,6 +10,7 @@ before_script:
   - test -d vendor || docker-php-ext-install mbstring pdo_pgsql curl intl gd xml zip bz2
   - test -d vendor || curl -sS https://getcomposer.org/installer | php
   - test -d vendor || php composer.phar install
+  - docker-php-ext-install pdo_mysql
 
 test:
   script:
