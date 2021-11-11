@@ -41,7 +41,7 @@ class AttemptDAO {
         if( $row = $stmt->fetch() ) {
             $result = 
                 new Attempt(
-                    $row['attemptId'],
+                    $row['attemptNo'],
                     $row['classId'],
                     $row['sectionId'],
                     $row['employeeId'],

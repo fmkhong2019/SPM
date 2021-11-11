@@ -1,7 +1,7 @@
 <?php
 class ConnectionManager {
 
-  public function getConnection() {
+  public function getAWSConnection() {
     $servername = "spm.cpaxvjaqps8a.ap-southeast-1.rds.amazonaws.com";
     $portnumber = "3306";
     $charset = 'utf8';
@@ -23,7 +23,7 @@ class ConnectionManager {
     return new PDO("mysql:host=$servername;port=$portnumber;dbname=$dbname;charset=$charset", $username, $password);     
   }
 
-  public function getLocalConnection() {
+  public function getConnection() {
     $servername = "localhost";
     $username = "root";
     $password = "";  //mamp pls change
