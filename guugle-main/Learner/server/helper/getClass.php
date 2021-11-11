@@ -1,6 +1,11 @@
 <?php
     require_once "./common.php";
-    $result = $classController = new ClassController();
+    session_start();
+    $classController = new ClassController();
+    $courseId = $_SESSION['courseId'];
+
+    $result = $classController->getClass($courseId);
+
     echo json_encode($result);
     
     ?>

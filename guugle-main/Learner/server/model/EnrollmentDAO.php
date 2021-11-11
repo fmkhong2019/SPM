@@ -42,6 +42,42 @@ class EnrollmentDAO {
 
     }
 
+    public function getCompletion($engineerid, $courseid) {
+        $conn = new ConnectionManager();
+        $pdo = $conn->getConnection();
+        $sql = "SELECT * FROM enrollment  where `engineerId` = :engineerId AND `courseId` = :courseId ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':engineerId', $engineerid, PDO::PARAM_STR);
+        $stmt->bindParam(':courseId', $courseid, PDO::PARAM_STR);
+        
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        
+        $result = [];
+        // $post_object = null;
+        if( $row = $stmt->fetch() ) {
+            $result[] = 
+                new Enrollment(
+                    $row['engineerId'],
+                    $row['classId'],
+                    $row['courseId'],
+                    $row['completed'],
+                    $row['enrolledDate'],
+                    $row['completedDate'],
+                    $row['progress']
+                    
+                );
+        
+        }
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
+ 
+
+    }
+
     public function getProgress($employeeId, $classid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
@@ -104,6 +140,7 @@ class EnrollmentDAO {
         $result = $stmt->execute();
         return $result;
     }
+    
 
     public function setCompleted ($employeeId, $classid) {
         $conn = new ConnectionManager();

@@ -1,9 +1,9 @@
 <?php
     include 'ClassDAO.php';
     class ClassController{
-        function getClass() {
+        function getClass($courseid) {
             $dao = new ClassDAO();
-            $courseid = $_SESSION['courseId'];
+            #$courseid = $_SESSION['courseId'];
             $classArray=$dao->getAllClasses($courseid);
             $result = array("class" => array() );
             foreach ($classArray as $class) {
