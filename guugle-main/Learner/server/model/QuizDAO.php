@@ -96,7 +96,7 @@
 public function addGrade($section,$class,$engineer,$score){
     $conn = new ConnectionManager();
     $pdo = $conn->getConnection();
-    $sql = "INSERT INTO Attempt (`sectionId`,`classId`,`employeeId`,`score`) VALUES(:sec,:class,:employee,:score) ";
+    $sql = "INSERT INTO attempt (`sectionId`,`classId`,`employeeId`,`score`) VALUES(:sec,:class,:employee,:score) ";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':sec', $section, PDO::PARAM_INT);

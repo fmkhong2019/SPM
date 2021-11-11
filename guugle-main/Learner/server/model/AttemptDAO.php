@@ -8,7 +8,7 @@ class AttemptDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "INSERT INTO `Attempt` (`classId`, `sectionId`, `employeeId`,`score`) VALUES (:classId, :sectionId, :employeeId, :score)";
+        $sql = "INSERT INTO `attempt` (`classId`, `sectionId`, `employeeId`,`score`) VALUES (:classId, :sectionId, :employeeId, :score)";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
@@ -26,7 +26,7 @@ class AttemptDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "SELECT * FROM `Attempt` WHERE `sectionId`= :sectionId AND `classId` = :classId AND `employeeId` = :employeeId";
+        $sql = "SELECT * FROM `attempt` WHERE `sectionId`= :sectionId AND `classId` = :classId AND `employeeId` = :employeeId";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);

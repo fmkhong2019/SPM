@@ -14,7 +14,7 @@ class WaitlistDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "SELECT * FROM Waitlist";
+        $sql = "SELECT * FROM waitlist";
 
         $stmt = $pdo->prepare($sql);
         
@@ -45,7 +45,7 @@ class WaitlistDAO {
         $conn = $connMgr->getConnection();
 
         // STEP 2
-        $sql = "INSERT into Waitlist (courseId, classId, employeeId) values (:courseId, :classId, :employeeId)";
+        $sql = "INSERT into waitlist (courseId, classId, employeeId) values (:courseId, :classId, :employeeId)";
         $stmt = $conn->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->bindParam(':courseId', $courseId, PDO::PARAM_INT);

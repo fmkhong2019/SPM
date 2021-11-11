@@ -14,7 +14,7 @@ class ClassDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "SELECT * FROM Class WHERE `classId` = :classId ";
+        $sql = "SELECT * FROM class WHERE `classId` = :classId ";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':classId', $classid, PDO::PARAM_STR);
@@ -52,7 +52,7 @@ class ClassDAO {
         // STEP 2
         $sql = "SELECT
                     *
-                FROM Class
+                FROM class
                 WHERE 
                     courseId = :id";
         $stmt = $conn->prepare($sql);

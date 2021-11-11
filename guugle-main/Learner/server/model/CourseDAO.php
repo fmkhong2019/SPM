@@ -14,7 +14,7 @@ class CourseDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "SELECT * FROM Course WHERE `courseId` = :courseId";
+        $sql = "SELECT * FROM course WHERE `courseId` = :courseId";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':courseId', $courseid, PDO::PARAM_STR);
@@ -81,7 +81,7 @@ class CourseDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "SELECT * FROM Course";
+        $sql = "SELECT * FROM course";
 
         $stmt = $pdo->prepare($sql);
     
