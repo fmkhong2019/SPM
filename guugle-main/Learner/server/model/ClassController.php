@@ -18,5 +18,17 @@
 
             return $result;
         }
+        function getCourse($trainerid){
+            $dao = new ClassDAO();
+            $classArray=$dao->getCoursesByTrainerId($trainerid);
+            $result = array("class" => array() );
+            foreach ($classArray as $class) {
+                $result["class"][] = array(
+                    "courseid"=> $class->getcourseid()
+                );
+            }
+
+            return $result;
+        }
     }
 ?>
