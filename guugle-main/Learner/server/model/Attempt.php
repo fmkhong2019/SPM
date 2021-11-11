@@ -1,15 +1,15 @@
 <?php
 
 class Attempt{
-    public $attemptId;
+    public $attemptNo;
     public $classId;
     public $sectionId;
     public $employeeId;
     public $score;
    
     
-    public function __construct($attemptId,$classId,$sectionId,$employeeId,$score, $dateTime) {
-        $this->attemptId = $attemptId;
+    public function __construct($attemptNo,$classId,$sectionId,$employeeId,$score) {
+        $this->attemptNo = $attemptNo;
         $this->classId = $classId;
         $this->sectionId = $sectionId;
         $this->employeeId = $employeeId;
@@ -17,8 +17,8 @@ class Attempt{
      
     }
 
-    public function getAttemptId() {
-        return $this->attemptId;
+    public function getAttemptNoattemptNo() {
+        return $this->attemptNo;
     }
 
     public function getclassId() {
