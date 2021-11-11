@@ -27,6 +27,8 @@
     }
 
     function build_table($array){
+      $courseDAO = new CourseDAO();
+      $courseAll = $courseDAO->getAll();
       // start table
       $html = '<table class="table">';
       // header row
@@ -39,10 +41,11 @@
       }
       $html .= '</tr>';
       $html .= '</thead>';
-  
+      $index=0;
       // data rows
       foreach( $array as $key=>$value){
-          $html .= '<tr><th>Course'.(101+(int)$key).'</th>';
+          
+          $html .= '<tr><th>Course'.$courseAll[$index]->getCourseID().'</th>';
           foreach($value as $key2=>$value2){
             foreach($value2 as $key3=>$value3){
               if($value3==true){
@@ -54,6 +57,7 @@
             
           }
           $html .= '</tr>';
+          $index++;
       }
     
   
