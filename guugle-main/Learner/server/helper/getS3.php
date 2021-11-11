@@ -1,18 +1,22 @@
 <?php
     require_once "common.php";
-    $dao = new ViewingDAO();
+    require '../../vendor/autoload.php';
+
+    use Aws\S3\S3Client;
+    use Aws\S3\Exception\S3Exception;
+
+    session_start();
 
    // AWS Info
 
 
-    require '../../vendor/autoload.php';
+   
 
    $bucketName = 'spmlmsmaterials';
    $IAM_KEY = 'AKIAR3OUAEMXMLICWQ7R';
    $IAM_SECRET = '';
 
-    use Aws\S3\S3Client;
-    use Aws\S3\Exception\S3Exception;
+
 
     $materialView = new MaterialView();
 
@@ -22,7 +26,7 @@
     //Obtained
     $keyPath = $_GET['keyPath'];
     $materialId = $_GET['materialId'];
-    $employeeId = $_GET['employeeId'];
+    $employeeId = $_SESSION['employeeId'];
 
 
 

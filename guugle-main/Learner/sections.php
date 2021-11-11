@@ -76,7 +76,7 @@ session_start();
 
         console.log("nihao")
 
-        const classId = '<?php echo($_GET['classId'])?>';
+        const classId = '<?php echo $_GET['classId'];?>';
         function getSection(){
     
             const request = new XMLHttpRequest();

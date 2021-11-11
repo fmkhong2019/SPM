@@ -1,7 +1,9 @@
 <script type='text/javascript'>
-    const sectionId = `<?php echo(1)?>`;
-    const classId = `<?php echo(1)?>`;
-    const employeeId = `<?php echo(1)?>`;
+
+    <?php session_start();?>
+    const sectionId = `<?php echo $_GET['sectionId']?>`;
+    const classId = `<?php echo $_GET['classId']?>`;
+    const employeeId = `<?php echo $_SESSION['employeeId']  ?>`;
 </script>
 
 <!DOCTYPE html>
@@ -84,9 +86,13 @@
                 if (this.readyState ==   4 && this.status==200){
                     console.log(this.responseText);
                     let data = JSON.parse(this.responseText).materials;
+                    console.log(data)
                     // console.log(typeof(data));
                     var materials = data;
                     var quizAccess = true;
+                    if(data.length==0){
+                        quizAccess = false;
+                    }
                     
                     for (material of materials){
                         var name= material["name"];

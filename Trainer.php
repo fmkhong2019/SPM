@@ -3,4 +3,4 @@ session_start();
 $_SESSION['employeeId'] = 2;
 $_SESSION['Role'] = 'Trainer';
 
-header('location: .index.php');
+header('location: ./index.php');

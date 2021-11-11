@@ -18,10 +18,10 @@ session_start();
         <div id="returnToSection"></div>
         <!-- <script type="text/javascript" src="./index.js"></script> -->
         <script>  
-            var classId = <?php echo($_GET['classId'])?>;
+            var classId = <?php echo $_GET['classId'];?>;
             // var classId =
-            var sectionId = -1;
-            var employeeId = <?php echo($_SESSION['employeeId']) ?>;
+            var sectionId = <?php echo $_GET['sectionId'];?>;
+            var employeeId = <?php echo $_SESSION['employeeId'];?>;
             function updateProgress(classId, employeeId) {
                 request.onreadystatechange = function(){
                     if (this.readyState ==   4 && this.status==200){}

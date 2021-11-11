@@ -21,10 +21,10 @@ session_start();
             // }
             console.log('hello');
 
-            var classId = <?php echo($_GET['classId'])?>;
+            var classId = <?php echo $_GET['classId'];?>;
             // var classId =
-            var sectionId = -1;
-            var employeeId = <?php echo($_SESSION['employeeId']) ?>;
+            var sectionId = 100;
+            var employeeId = <?php echo $_SESSION['employeeId'];?>;
 
             const request = new XMLHttpRequest();
         
