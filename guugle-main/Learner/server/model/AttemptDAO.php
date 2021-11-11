@@ -26,7 +26,7 @@ class AttemptDAO {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
 
-        $sql = "SELECT * FROM `attempt` WHERE `sectionId`= :sectionId AND `classId` = :classId AND `employeeId` = :employeeId";
+        $sql = "SELECT * FROM `Attempt` WHERE `sectionId`= :sectionId AND `classId` = :classId AND `employeeId` = :employeeId";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_INT);
