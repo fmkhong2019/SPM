@@ -190,7 +190,6 @@
          $courses2 = $courseDAO2->getAll();
        
         foreach($courses2 as $course){
-          echo $course->selfEnrollPeriod;
           echo "<tr><th>".$course->courseId."</td><td>".$course->name."</td><td>".$course->getSelfEnrollPeriod()."</td><td><form action='setSelfEnrolPeriod.php' method='post'><button type='submit' name='selfEnrol' value='".$course->courseId."'"."class='btn btn-success mr-1'>Set Self-enrollment Period</button><button type='button' id='".$course->courseId."'"."class='btn btn-primary' onclick='viewCourse(this)'>View Details</button></form></td></tr>";
         }
         
