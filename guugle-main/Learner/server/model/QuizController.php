@@ -85,4 +85,10 @@ class QuizController {
 
     } 
 }
+<<<<<<< Updated upstream
 ?>
+=======
+// $quiz = new QuizController;
+// $results = $quiz->displayQuiz(1,1);
+// var_dump($results['questions']);
+>>>>>>> Stashed changes

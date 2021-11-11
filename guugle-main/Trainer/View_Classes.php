@@ -137,7 +137,7 @@ button:hover, a:hover {
 </body>
 <script>
     function passval(value){
-        document.getElementById("confirm").setAttribute('href', "../CoursesComponent/server/helper/requestEnroll.php?courseId=<?php echo $courseId;?>&classId=" +value+ "&employeeId=<?php echo $employeeId;?>");
+        document.getElementById("confirm").setAttribute('href', "../Learner/server/helper/requestEnroll.php?courseId=<?php echo $courseId;?>&classId=" +value+ "&employeeId=<?php echo $employeeId;?>");
     }
     var url = "../Learner/server/helper/getPrereqCompletion.php";
     var request = new XMLHttpRequest();

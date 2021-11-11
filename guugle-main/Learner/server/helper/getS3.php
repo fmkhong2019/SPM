@@ -3,11 +3,17 @@
     $dao = new ViewingDAO();
 
    // AWS Info
+<<<<<<< Updated upstream
     $bucketName = 'spmlmsmaterials';
     $IAM_KEY = 'AKIAR3OUAEMXP2SOFBKT';
     $IAM_SECRET = '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';
 
     require '../../vendor/autoload.php';
+=======
+   $bucketName = 'spmlmsmaterials';
+   $IAM_KEY = 'AKIAR3OUAEMXMLICWQ7R';
+   $IAM_SECRET = '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';
+>>>>>>> Stashed changes
 
     use Aws\S3\S3Client;
     use Aws\S3\Exception\S3Exception;
