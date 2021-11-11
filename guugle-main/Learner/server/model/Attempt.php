@@ -8,7 +8,7 @@ class Attempt{
     public $score;
    
     
-    public function __construct($attemptId,$classId,$sectionId,$engineerId,$score, $dateTime) {
+    public function __construct($attemptId,$classId,$sectionId,$employeeId,$score, $dateTime) {
         $this->attemptId = $attemptId;
         $this->classId = $classId;
         $this->sectionId = $sectionId;
@@ -29,8 +29,8 @@ class Attempt{
         return $this->sectionId;
     }
 
-    public function getEngineerId() {
-        return $this->engineerId;
+    public function getEmployeeId() {
+        return $this->employeeId;
     }
     public function getScore(){
         return $this->score;
