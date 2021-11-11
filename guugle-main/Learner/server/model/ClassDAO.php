@@ -43,6 +43,39 @@ class ClassDAO {
  
 
     }
+    public function getCoursesByTrainerId($trainerid) {
+        // STEP 1
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->getConnection();
+
+        // STEP 2
+        $sql = "SELECT * FROM class WHERE `trainerId` = :id ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $trainerid, PDO::PARAM_INT);
+
+        // STEP 3
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        $classes = []; // Indexed Array of Post objects
+        while( $row = $stmt->fetch() ) {
+            $classes[] =
+                new Classes(
+                    $row['courseId'],
+                    $row['classId'],
+                    $row['startDate'],
+                    $row['endDate'],
+                    $row['trainerId'],
+                    $row['classSize']);
+        }
+
+        // STEP 5
+        $stmt = null;
+        $conn = null;
+
+        // STEP 6
+        return $classes;
+    }
 
     public function getAllClasses($courseId) {
         // STEP 1
