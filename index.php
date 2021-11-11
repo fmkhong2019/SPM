@@ -1,7 +1,6 @@
 <?php
 session_start();
-$_SESSION['Role'] = 'HR';
-$_SESSION['employeeId'] = 1;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,6 +128,11 @@ $_SESSION['employeeId'] = 1;
                     <a href="home.html" class="nav-link">Home</a>
                     
                 </li> -->
+        <li class="nav-item">
+          <a href=".Trainer.php" class="nav-link">Trainer</a>
+          <a href=".Learner.php" class="nav-link">Learner</a>
+          <a href=".HR.php" class="nav-link">HR</a>
+        </li>
         <li class="nav-item">
           <a href="./guugle-main/Trainer/View_Courses.php" class="nav-link">View Courses</a>
         </li>

@@ -129,6 +129,9 @@ $classId = $_GET['classId'];
           <div class='form-group'>
             <input type="submit" id="submit" name="submit" class="form-control btn btn-success">
           </div>
+          <div class='form-group'>
+            <a href='.sections'php class="form-control btn btn-success">Finish Creation</a>
+          </div>
         </form>
       </div>
 

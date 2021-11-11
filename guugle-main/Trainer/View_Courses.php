@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-//session_start();
+session_start();
 //$courseId=$_GET["id"];
 //$employeeId = $_SESSION["id"];
-$employeeId = 1;
-$_SESSION['employeeid'] = $employeeId;
+if($_SESSION['Role'] != 'Trainer'){
+  header("location: ../../index.php");
+}
+
 
 //$_SESSION['courseId']=$courseId;
 ?>
