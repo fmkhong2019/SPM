@@ -9,6 +9,7 @@ class ConnectionManager {
     $password = "ilovespm";  //mamp pls change
     $dbname = "LMS";
     
+    
     return new PDO("mysql:host=$servername;port=$portnumber;dbname=$dbname;charset=$charset", $username, $password);     
   }
 
