@@ -13,7 +13,7 @@ class EnrollmentDAO {
     public function getClass($employeeId) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "SELECT * FROM Enrollment  where `employeeId` = :employeeId ";
+        $sql = "SELECT * FROM enrollment  where `employeeId` = :employeeId ";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
@@ -81,7 +81,7 @@ class EnrollmentDAO {
     public function getProgress($employeeId, $classid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "SELECT * FROM Enrollment  where `employeeId` = :employeeId AND `classId` = :classId ";
+        $sql = "SELECT * FROM enrollment  where `employeeId` = :employeeId AND `classId` = :classId ";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':employeeId', $employeeId, PDO::PARAM_STR);
@@ -115,7 +115,7 @@ class EnrollmentDAO {
     public function updateProgress($employeeId, $classid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "UPDATE Enrollment
+        $sql = "UPDATE enrollment
             SET progress = progress + 1
             WHERE `employeeId` = :employeeId AND `classId` = :classId";
         $stmt = $pdo->prepare($sql);
@@ -129,7 +129,7 @@ class EnrollmentDAO {
     public function setProgress($employeeId, $classid, $progress) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "UPDATE Enrollment
+        $sql = "UPDATE enrollment
             SET progress = :progress
             WHERE `employeeId` = :employeeId AND `classId` = :classId";
         $stmt = $pdo->prepare($sql);
@@ -145,7 +145,7 @@ class EnrollmentDAO {
     public function setCompleted ($employeeId, $classid) {
         $conn = new ConnectionManager();
         $pdo = $conn->getConnection();
-        $sql = "UPDATE Enrollment
+        $sql = "UPDATE enrollment
             SET completed = 1
             WHERE `employeeId` = :employeeId AND `classId` = :classId";
         $stmt = $pdo->prepare($sql);
