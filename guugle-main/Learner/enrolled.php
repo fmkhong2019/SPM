@@ -122,11 +122,11 @@
                         console.log(c);
 
                         if(completed ==1 ){
-                            var display = 'Not completed'
+                            var display = 'Completed'
                         }
 
                         else {
-                            var display = "Completed"
+                            var display = "Not Completed"
                         }
    
                         // var completed = classes["completed"]
