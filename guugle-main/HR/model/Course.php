@@ -6,9 +6,11 @@ class Course{
     public $courseDesc;
     public $selfEnrollPeriod;
 
-    public function __construct($courseId, $name) {
+    public function __construct($courseId, $name, $courseDesc, $selfEnrollPeriod) {
         $this->courseId = $courseId;
         $this->name = $name;
+        $this->courseDesc = $courseDesc;
+        $this->selfEnrollPeriod = $selfEnrollPeriod;
     }
 
     public function getCourseID() {

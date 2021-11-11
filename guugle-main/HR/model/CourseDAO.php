@@ -11,8 +11,7 @@ class CourseDAO {
 
         // STEP 2
         $sql = "SELECT
-                    courseId,
-                    courseName
+                    *
                 FROM course"; // SELECT * FROM post; // This will also work
         $stmt = $conn->prepare($sql);
 
@@ -26,7 +25,10 @@ class CourseDAO {
             $courses[] =
                 new Course(
                     $row['courseId'],
-                    $row['courseName']);
+                    $row['courseName'],
+                    $row['courseDescription'],
+                    $row['selfEnrollPeriod']
+                );
         }
 
         // STEP 5
@@ -61,7 +63,9 @@ class CourseDAO {
             $course = 
                 new Course(
                     $row['courseId'],
-                    $row['courseName']);
+                    $row['courseName'],
+                    $row['courseDescription'],
+                    $row['selfEnrollPeriod']);
         }
 
         // STEP 5
