@@ -49,6 +49,9 @@
                 <li class="nav-item">
                     <a href="user_profile.php" class="nav-link">Courses</a>
                 </li>
+                <li class="nav-item">
+                    <a href="../../index.php" class="nav-link">Home</a>
+                </li>
             </ul>
         </div>
     </nav>

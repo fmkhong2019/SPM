@@ -166,7 +166,7 @@ session_start();
   </nav>
   <!-- Header-->
   <!-- Taken from "https://www.freepik.com" -->
-  <div class="parallax-window tint header" data-parallax="scroll" data-image-src="img/interview6.jpg" style="min-height: 800px; margin-top:0px">
+  <div class="parallax-window tint header" data-parallax="scroll" data-image-src="./img/singapore.jpg" style="min-height: 800px; margin-top:0px">
     <div class="headText parallax-text p-text">
       <h1>One stop learning platform</h1>
       <form method='get' action='https://www.linkedin.com/oauth/v2/authorization' class="form-inline">
@@ -205,9 +205,9 @@ session_start();
         </div>
       </div>
       <div class="card col-sm-4" style="width: 18rem;">
-        <img class="card-img-top" src="img/xinwei.jpeg" alt="xw">
+        <img class="card-img-top" src="./img/liyin.jpg" alt="xw">
         <div class="card-body">
-          <h5 class="card-title">Wong Xin Wei <a href="https://www.linkedin.com/in/xinweiwong/" target="_blank" style="padding-left: 5px;"><i class="fab fa-linkedin fa-md"></i></a></h5>
+          <h5 class="card-title">Lin Liyin <a href="https://www.linkedin.com/in/xinweiwong/" target="_blank" style="padding-left: 5px;"><i class="fab fa-linkedin fa-md"></i></a></h5>
           <p class="desc">Tech Lead, Google LLC.</p>
           <div class="rating">
             <i class="fas fa-star"></i>

@@ -112,8 +112,8 @@ session_start();
                     .onComplete
                     .add(function (sender) {
                         document
-                            .querySelector('#surveyResult')
-                            .textContent = "Result JSON:\n" + JSON.stringify(sender.data);
+                            // .querySelector('#surveyResult')
+                            // .textContent = "Result JSON:\n" + JSON.stringify(sender.data);
                         console.log(sender);
                         var correct = document.getElementById('correct').innerText;
                         var all = document.getElementById('all').innerText;

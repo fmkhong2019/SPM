@@ -126,8 +126,8 @@
                     .onComplete
                     .add(function (sender) {
                         document
-                            .querySelector('#surveyResult')
-                            .textContent = "Result JSON:\n" + JSON.stringify(sender.data);
+                            // .querySelector('#surveyResult')
+                            // .textContent = "Result JSON:\n" + JSON.stringify(sender.data);
                         console.log(sender);
 
                         
