@@ -2,9 +2,9 @@
 
 use Aws\Result;
 
-include 'EnrollmentDAO.php';
-include 'ClassDAO.php';
-include 'CourseDAO.php';
+include_once 'EnrollmentDAO.php';
+include_once 'ClassDAO.php';
+include_once 'CourseDAO.php';
 class EnrollmentController{
 
     function getCompletion($engineerid, $courseid){
@@ -73,7 +73,8 @@ class EnrollmentController{
                         "classId" =>$c->getclassid(),
                         "courseName" => $cname,
                         "enrolledDate" => $c->getenrolleddate(),
-                        "completed" => $c->getcompleted());
+                        "completed" => $c->getcompleted(),
+                        "progress" => $c->getprogress());
                     //}
                 }
                 

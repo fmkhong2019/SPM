@@ -2,7 +2,7 @@
 /*  SQL operations */ 
 
 require_once 'ConnectionManager.php';
-include 'Section.php';
+include_once 'Section.php';
 
 class SectionDAO {
 

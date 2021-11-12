@@ -1,7 +1,7 @@
 <?php
 
-include 'MaterialDAO.php';
-include 'ViewingDAO.php';
+include_once 'MaterialDAO.php';
+include_once 'ViewingDAO.php';
 
 class MaterialView {
     public function getMaterials($classId, $sectionId,$employeeId){

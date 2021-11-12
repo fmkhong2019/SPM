@@ -1,7 +1,6 @@
 <?php
 
-require_once "common.php";
-
+include_once 'QuizDAO.php';
 class QuizController
 {
     // Rohan's create Quiz 
@@ -86,6 +85,32 @@ class QuizController
         $response = array("questions" => $result, "timeLimit" => $time, "courseName" => $courseName, "sectionId" => $sectionId);
 
         return $response;
+    }
+
+    function computeTotalTime($section,$classId){
+        $dao = new QuizDAO();
+        $time=$dao->quiztotaltime($section,$classId);
+        return $time;
+    }
+    function computeGrades($section,$class,$questionArray){
+            $dao = new QuizDAO();
+            $score=0;
+            foreach ($questionArray as $key => $value) {
+    
+            $ans=$dao->ComputeGrade($section,$class,$key);
+    
+                foreach($ans as $answer){
+        
+            
+                if($answer->getcorrectAnswer()==$value){
+                $score+=1;
+                }
+                else{
+                $score+=0;
+                }
+            }
+            }
+    return $score;
     }
 }
 

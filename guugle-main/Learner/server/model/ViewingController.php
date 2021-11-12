@@ -1,6 +1,6 @@
 <?php
 
-include 'ViewingDAO.php';
+include_once 'ViewingDAO.php';
 
 class ViewingController {
     function updateViewingCompletion($materialId, $employeeId) {

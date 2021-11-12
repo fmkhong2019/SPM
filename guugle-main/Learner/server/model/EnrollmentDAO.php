@@ -2,7 +2,7 @@
 /*  SQL operations */ 
 
 require_once 'ConnectionManager.php';
-include 'Enrollment.php';
+include_once 'Enrollment.php';
 
 class EnrollmentDAO {
 

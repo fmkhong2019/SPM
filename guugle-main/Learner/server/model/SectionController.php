@@ -1,8 +1,8 @@
 <?php
     // require './common.php';
-    include 'EnrollmentDAO.php';
-    include 'SectionDAO.php';
-    include 'QuizDAO.php';
+    include_once 'EnrollmentDAO.php';
+    include_once 'SectionDAO.php';
+    include_once 'QuizDAO.php';
     class SectionController {
         function getSection($employeeId, $classId) {
             $dao = new SectionDAO();

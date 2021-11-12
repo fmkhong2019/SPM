@@ -1,6 +1,7 @@
 <?php
     require_once 'ConnectionManager.php';
-
+    
+    include_once 'Viewing.php';
     class ViewingDAO {
         public function createViewing($materialId, $employeeId){
             $conn = new ConnectionManager();

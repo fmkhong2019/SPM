@@ -1,4 +1,6 @@
 <?php
+    require_once 'ConnectionManager.php';
+    include_once 'Material.php';
     class MaterialDAO{
 
         public function getMaterials($classId, $sectionId) {

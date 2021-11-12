@@ -121,7 +121,7 @@
                                     <a href="./server/helper/updateViewingCompletion.php?sectionId=${sectionId}&classId=${classId}&materialId=${materialId}" class="btn btn-primary">Incomplete</a>
                                 </td>
                             </tr>`;
-                        }`
+                        }
                         else {
                             value += ` <td>
                                     <span>Completed!</span>
