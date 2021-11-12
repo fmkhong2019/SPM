@@ -33,7 +33,7 @@ $classId = $_GET['classId'];
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
-    <a href="index.html" class="navbar-brand"><img src="" style="width: 100px; height: auto;">LMS</a>
+    <a href="../index.php" class="navbar-brand">LMS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hamburger">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -130,7 +130,7 @@ $classId = $_GET['classId'];
             <input type="submit" id="submit" name="submit" class="form-control btn btn-success">
           </div>
           <div class='form-group'>
-            <a href='.sections'php class="form-control btn btn-success">Finish Creation</a>
+            <a href='./sectionTrainer?classId=1'php class="form-control btn btn-success">Finish Creation</a>
           </div>
         </form>
       </div>

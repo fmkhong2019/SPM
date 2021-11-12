@@ -60,7 +60,7 @@ button:hover, a:hover {
 </style>
 <body>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
-        <a href="index.html" class="navbar-brand"><img src="" style="width: 100px; height: auto;">LMS</a>
+        <a href="../../index.php" class="navbar-brand"><img src="" style="width: 100px; height: auto;">LMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hamburger">
             <span class="navbar-toggler-icon"></span>
         </button>

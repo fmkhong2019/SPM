@@ -21,9 +21,10 @@
                 // var_dump($add);
                 $progress = $dao->getProgress($employeeId, $classid);
                 $curr_progress=$progress[0]->getProgress();
+                var_dump($curr_progress);
                 $numOfSections = $dao3->numberOfSections($classid)-1;
                 var_dump($numOfSections);
-                if($curr_progress == ($numOfSections-1) || $curr_progress==-1 ) {
+                if($curr_progress == ($numOfSections-1) ) {
                     // So individuals whp have cleared the last chapter will be shown final quiz
                     $result=$dao->setProgress($employeeId, $classid, -1);
                 }

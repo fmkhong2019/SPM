@@ -120,11 +120,11 @@ session_start();
                         var grade = (correct / all);
                         console.log(grade)
                         if(grade>=0.85) {
-                            var pass = true;
+                            var pass = 1;
                         }
 
                         else {
-                            var pass = false;
+                            var pass = 1000;
                         }
 
                         

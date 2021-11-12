@@ -35,7 +35,7 @@ $classId = $_GET["classId"];
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav fixed-top">
-        <a href="main.php" class="navbar-brand">LMS</a>
+        <a href="../../index.php" class="navbar-brand">LMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hamburger">
             <span class="navbar-toggler-icon"></span>
         </button>

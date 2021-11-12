@@ -28,11 +28,11 @@
 </head>
 
 <style>
-    body {
+    /* body {
         background-image: url("./bg_6.jpg");
         background-repeat: repeat;
         background-size: cover;
-    }
+    } */
 </style>
 
 <body>
@@ -58,7 +58,7 @@
 
     <main>
         <div class="row">
-            <div id='bookings' class=" col-sm-6 table-responsive-lg box_bookings animate__animated animate__bounceIn bounce1" style='width: fit-content; '>
+            <div id='bookings' class=" col-sm-6 table-responsive-lg box_bookings" style='width: fit-content; '>
                 <table id='details' class = 'table table-hover table-borderless table-dark'>
                     <thead>
                         <tr style="border-bottom: 2px solid orange;">
@@ -121,8 +121,7 @@
                                     <a href="./server/helper/updateViewingCompletion.php?sectionId=${sectionId}&classId=${classId}&materialId=${materialId}" class="btn btn-primary">Incomplete</a>
                                 </td>
                             </tr>`;
-                        }
-                        
+                        }`
                         else {
                             value += ` <td>
                                     <span>Completed!</span>
@@ -134,12 +133,12 @@
 
                     if(quizAccess){
                         value += `<tr>
-                                <th scope="row">Quiz</th>
-                                <td>Test</td>
+                                <th scope="row">Practice Quiz</th>
+                                <td>Ungraded, for your practice</td>
                                 <td>
                                     <a href="ungradedQuiz.php?classId=${classId}&sectionId=${sectionId}" class="btn btn-primary">Bring me to Quiz</a>
                                 </td>
-                                <td>Test</td>`;
+                                <td></td>`;
                     }
 
          

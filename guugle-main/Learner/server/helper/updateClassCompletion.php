@@ -7,7 +7,7 @@
     $classId = $_GET['classId'];
     $pass = $_GET['pass'];
 
-    if($pass) {
+    if($pass == 1) {
         $dao2->updateCompletion($employeeId, $classId);
     }
 
