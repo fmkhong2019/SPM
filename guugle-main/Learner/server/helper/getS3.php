@@ -14,7 +14,7 @@
 
    $bucketName = 'spmlmsmaterials';
    $IAM_KEY = 'AKIAR3OUAEMXMLICWQ7R';
-   $IAM_SECRET = '';
+   $IAM_SECRET = '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';
 
 
 

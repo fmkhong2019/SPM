@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php session_start();?>
 
 <html lang="en">
     <head>
@@ -19,16 +17,19 @@ session_start();
         <!-- <script type="text/javascript" src="./index.js"></script> -->
         <script>  
             var classId = <?php echo $_GET['classId'];?>;
-            // var classId =
+           console.log(sectionId)
             var sectionId = <?php echo $_GET['sectionId'];?>;
             var employeeId = <?php echo $_SESSION['employeeId'];?>;
-            function updateProgress(classId, employeeId) {
-                request.onreadystatechange = function(){
-                    if (this.readyState ==   4 && this.status==200){}
-                }
-                request.open("GET", `./server/helper/displayQuiz.php?classId=${classId}&employeeId=${employeeId}`, true);
-                request.send();
-            }
+
+
+            console.log(sectionId)
+            // function updateProgress(classId, employeeId) {
+            //     request.onreadystatechange = function(){
+            //         if (this.readyState ==   4 && this.status==200){}
+            //     }
+            //     request.open("GET", `./server/helper/displayQuiz.php?classId=${classId}&sectionId=${sectionId}&employeeId=${employeeId}`, true);
+            //     request.send();
+            // }
             console.log('hello');
             const request = new XMLHttpRequest();
         
@@ -130,12 +131,12 @@ session_start();
                         console.log(sender);
 
                         
-                        document.querySelector('#returnToSection').innerHTML = `<a href="materials.php?sectionId=${sectionId+1}$classId=${classId}" class="btn btn-primary">Go on to the next Section</a>`
+                        document.querySelector('#returnToSection').innerHTML = `<a href="./server/helper/updateProgress.php?sectionId=${sectionId}&classId=${classId}" class="btn btn-primary">Go back to sections</a>`
                     });
                 survey.render("surveyElement");
                 }
             }
-            request.open("GET", `./server/helper/displayQuiz.php?classId=${classId}&sectionId=${sectionId}&employeeId=${employeeId}`, true);
+            request.open("GET", `./server/helper/displayQuiz.php?classId=${classId}&sectionId=${sectionId}`, true);
             request.send();
         
         </script>

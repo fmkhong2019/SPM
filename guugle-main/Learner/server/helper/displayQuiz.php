@@ -8,5 +8,6 @@
 
     $quizController = new QuizController();
     $response = $quizController->displayQuiz($sectionId,$classId);
+    // $response = $quizController->displayQuiz(1,2);
     echo json_encode($response);
 ?>

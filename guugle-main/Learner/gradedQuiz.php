@@ -137,7 +137,7 @@ session_start();
                 survey.render("surveyElement");
                 }
             }
-            request.open("GET", `./server/helper/displayQuiz.php?classId=${classId}&sectionId=${sectionId}&employeeId=${employeeId}`, true);
+            request.open("GET", `./server/helper/displayQuiz.php?classId=${classId}&sectionId=100`, true);
             request.send();
         
 

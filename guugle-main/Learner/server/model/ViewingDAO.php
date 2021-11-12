@@ -1,4 +1,5 @@
 <?php
+    require_once 'ConnectionManager.php';
 
     class ViewingDAO {
         public function createViewing($materialId, $employeeId){

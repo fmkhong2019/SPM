@@ -5,21 +5,23 @@
     $attemptController = new AttemptController();
 
 
-    $classid = $_SESSION['classId'];
+    $classid = $_GET['classId'];
     $employeeId = $_SESSION['employeeId'];
-    $sectionId = $_SESSION['sectionId'];
+    $sectionId = $_GET['sectionId'];
     
     
     // For ungraded score = 0
     // To  check for score  if graded           
     // $score = $_SESSION['score'];
-    $score = 0;
+    $score = 100;
 
     // $employeeId = 1;
     // $classid = 1;
     // $sectionId = 1;
 
-    $attemptController-> updateProgress($classid,$sectionId,$employeeId,$score);
+    $result = $attemptController-> updateProgress($classid,$sectionId,$employeeId,$score);
+
+    var_dump($result);
     
-    header("Location: ../../quiz.php" );
+    header("Location: ../../sections.php?classId=" . strval($classid));
 ?>

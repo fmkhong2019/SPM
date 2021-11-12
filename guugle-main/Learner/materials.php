@@ -1,9 +1,9 @@
 <script type='text/javascript'>
 
     <?php session_start();?>
-    const sectionId = `<?php echo $_GET['sectionId']?>`;
-    const classId = `<?php echo $_GET['classId']?>`;
-    const employeeId = `<?php echo $_SESSION['employeeId']  ?>`;
+    const sectionId = <?php echo $_GET['sectionId'];?>;;
+    const classId = <?php echo $_GET['classId'];?>;
+    const employeeId = <?php echo $_SESSION['employeeId'];?>;
 </script>
 
 <!DOCTYPE html>
@@ -72,12 +72,16 @@
             </div>
         </div>
 
+        <div class = "row w-25" id='back'> 
+        </div>
+
 
     </main>
 
 
 
     <script>
+        document.getElementById('back').innerHTML=`<a href="./sections.php?sectionId=${sectionId}&classId=${classId}" class="btn btn-primary">Go back to section</a>`
         function getMaterials(){
             const request = new XMLHttpRequest();
             
@@ -111,7 +115,7 @@
                             console.log('uncomplete')
                             quizAccess = false;
                             value += ` <td>
-                                    <a href="./server/helper/updateViewingCompletion.php?employeeId=${employeeId}&materialId=${materialId}" class="btn btn-primary">Incomplete</a>
+                                    <a href="./server/helper/updateViewingCompletion.php?sectionId=${sectionId}&classId=${classId}&materialId=${materialId}" class="btn btn-primary">Incomplete</a>
                                 </td>
                             </tr>`;
                         }

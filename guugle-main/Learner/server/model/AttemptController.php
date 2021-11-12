@@ -17,12 +17,13 @@
             // var_dump($attempt);        
         
             if(!$attempt) {
-                $add = $dao2->addAttempt($classid,$sectionId,$employeeId,$score);
+                // $add = $dao2->addAttempt($classid,$sectionId,$employeeId,$score);
+                // var_dump($add);
                 $progress = $dao->getProgress($employeeId, $classid);
-                var_dump($progress);
-                $numOfSections = $dao3->numberOfSections($classid);
+                $curr_progress=$progress[0]->getProgress();
+                $numOfSections = $dao3->numberOfSections($classid)-1;
                 var_dump($numOfSections);
-                if($progress >= ($numOfSections-1)) {
+                if($curr_progress == ($numOfSections-1) || $curr_progress==-1 ) {
                     // So individuals whp have cleared the last chapter will be shown final quiz
                     $result=$dao->setProgress($employeeId, $classid, -1);
                 }
@@ -31,8 +32,8 @@
                 }
                 
             }
+
+            var_dump($result);
         }
     }
-
-
 ?>

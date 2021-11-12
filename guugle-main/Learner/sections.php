@@ -55,7 +55,6 @@ session_start();
                 <table id='details' class = 'table table-hover table-borderless table-dark'>
                     <thead>
                         <tr style="border-bottom: 2px solid orange;">
-                            <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Description</th>
                             <th scope="col"></th>
@@ -65,6 +64,10 @@ session_start();
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class = "row w-25">
+        <a href="./enrolled.php" class="btn btn-primary">Back to enrolled class</a>
         </div>
 
 
@@ -98,23 +101,25 @@ session_start();
                     // var enrolledDate = classes["enrolledDate"]
                     // var completedDate = classes["completedDate"]
                     // var progress = classes["progress"]
+                    if(sectionid != 100){
                     search_results.innerHTML += `
-                    <tr><td>${classid}</td>
+                    <tr>
                     
                     <td>${sname}</td>
                     <td>${description}</td>
                     <td><input type = "button" value = "View all materials" id = $sectionid = onclick="myFunction(${sectionid}, ${classId})"></button></td>
                     </tr>
                     </form>`
+                    }
                                         
                 }
                 if(gradedQuizAccess) {
                     search_results.innerHTML += `
-                    <tr><td>${classid}</td>
+                    <tr>
                     
                     <td>Final Quiz</td>
                     <td>Get above the passing mark to attain a badge</td>
-                    <td><a href="gradedQuiz.php?classId=${classId}" class="btn btn-primary">Bring me to Quiz</a></td>
+                    <td><a href="gradedQuiz.php?classId=${classId}&sectionId=100" class="btn btn-primary">Attempt Now!</a></td>
                     </tr>
                     </form>`
                 }

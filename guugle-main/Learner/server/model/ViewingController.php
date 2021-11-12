@@ -11,4 +11,8 @@ class ViewingController {
     
 
 }
+
+// $test = new ViewingController();
+// $result= $test->updateViewingCompletion(1,1)
+
 ?>

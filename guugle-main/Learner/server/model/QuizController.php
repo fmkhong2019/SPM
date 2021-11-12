@@ -43,8 +43,8 @@ class QuizController
         $dao3 = new CourseDAO();
         // $sectionId = $_SESSION['quizsec'];
         // $classId = $_SESSION['quizclass'];
-        $sectionId = 1;
-        $classId = 1;
+        // $sectionId = 1;
+        // $classId = 1;
 
 
         // $list=$dao->getUpdatedList($_SESSION['quizsec'],$_SESSION['quizclass']);
@@ -90,5 +90,5 @@ class QuizController
 }
 
 // $quiz = new QuizController;
-// $results = $quiz->displayQuiz(1,1);
+// $results = $quiz->displayQuiz(2,1);
 // var_dump($results['questions']);
